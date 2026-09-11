@@ -159,11 +159,19 @@ async function runDailyScrape() {
                 const page = await browser.newPage();
                 await page.setViewport({ width: 1920, height: 1080 });
                 await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36');
+                await page.setRequestInterception(true);
+                page.on('request', (req) => {
+                    if (['image', 'stylesheet', 'font', 'media'].includes(req.resourceType())) {
+                        req.abort();
+                    } else {
+                        req.continue();
+                    }
+                });
                 
                 try {
                     const url = `https://www.op.gg/champions/${champ}/counters/${role}?region=kr&tier=emerald_plus`;
-                    await page.goto(url, { waitUntil: 'networkidle2', timeout: 30000 });
-                    await new Promise(r => setTimeout(r, 2500));
+                    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
+                    await new Promise(r => setTimeout(r, 4000));
                     
                     await scrollToLoadAll(page);
                     
@@ -234,11 +242,21 @@ app.get('/api/scrape', async (req, res) => {
         await page.setViewport({ width: 1920, height: 1080 });
         await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36');
         
+        // Optimize for free cloud tier: block images, stylesheets, and fonts
+        await page.setRequestInterception(true);
+        page.on('request', (req) => {
+            if (['image', 'stylesheet', 'font', 'media'].includes(req.resourceType())) {
+                req.abort();
+            } else {
+                req.continue();
+            }
+        });
+        
         const url = `https://www.op.gg/champions/${champion}/counters/${role}?region=kr&tier=emerald_plus`;
-        await page.goto(url, { waitUntil: 'networkidle2', timeout: 30000 });
+        await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
         
         // Wait for dynamic rendering
-        await new Promise(r => setTimeout(r, 3000));
+        await new Promise(r => setTimeout(r, 4000));
         
         // Scroll repeatedly to load ALL counter items
         await scrollToLoadAll(page);
@@ -294,9 +312,18 @@ app.post('/api/scrape-batch', async (req, res) => {
                 await page.setViewport({ width: 1920, height: 1080 });
                 await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36');
                 
+                await page.setRequestInterception(true);
+                page.on('request', (req) => {
+                    if (['image', 'stylesheet', 'font', 'media'].includes(req.resourceType())) {
+                        req.abort();
+                    } else {
+                        req.continue();
+                    }
+                });
+
                 const url = `https://www.op.gg/champions/${champion}/counters/${role}?region=kr&tier=emerald_plus`;
-                await page.goto(url, { waitUntil: 'networkidle2', timeout: 30000 });
-                await new Promise(r => setTimeout(r, 3000));
+                await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
+                await new Promise(r => setTimeout(r, 4000));
                 
                 // Scroll repeatedly to load ALL counter items
                 await scrollToLoadAll(page);
