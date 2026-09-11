@@ -18,13 +18,19 @@ app.use(express.static(__dirname));
 // Repeatedly scroll the counter list until all items are loaded
 async function scrollToLoadAll(page) {
     let prevCount = 0;
+    let noChangeCount = 0;
     for (let attempt = 0; attempt < 30; attempt++) {
         const currentCount = await page.evaluate(() => {
             const items = document.querySelectorAll('ul.border-t li');
             return items.length;
         });
         
-        if (currentCount === prevCount && attempt > 0) break; // No new items loaded
+        if (currentCount === prevCount && attempt > 0) {
+            noChangeCount++;
+            if (noChangeCount >= 2) break; // Only break if it fails to load twice in a row
+        } else {
+            noChangeCount = 0;
+        }
         prevCount = currentCount;
         
         await page.evaluate(() => {
@@ -33,7 +39,7 @@ async function scrollToLoadAll(page) {
                 scrollable.scrollTop = scrollable.scrollHeight;
             }
         });
-        await new Promise(r => setTimeout(r, 800));
+        await new Promise(r => setTimeout(r, 2000));
     }
 }
 
