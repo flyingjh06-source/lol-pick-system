@@ -396,6 +396,52 @@ function saveUserData() {
     localStorage.setItem(key, JSON.stringify(state.userData));
 }
 
+// Data Export/Import
+window.exportData = function() {
+    const dataStr = JSON.stringify(state.userData, null, 2);
+    const blob = new Blob([dataStr], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `lol_pick_system_backup_${state.currentUser}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+};
+
+window.importData = function(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const parsed = JSON.parse(e.target.result);
+            if (parsed.pool && parsed.matchups) {
+                state.userData.pool = parsed.pool;
+                state.userData.matchups = parsed.matchups;
+                if(parsed.apiKey) state.userData.apiKey = parsed.apiKey;
+                
+                saveUserData();
+                if (state.isDataEntryMode) {
+                    renderDataEntryView();
+                } else {
+                    renderMainView();
+                }
+                alert('데이터 불러오기가 완료되었습니다!');
+            } else {
+                alert('올바른 백업 파일 형식이 아닙니다.');
+            }
+        } catch (error) {
+            alert('파일을 읽는 중 오류가 발생했습니다.');
+        }
+        event.target.value = ''; // Reset input
+    };
+    reader.readAsText(file);
+};
+
 // OP.GG Data Sync Feature
 const OPGG_SERVER = (window.location.protocol === 'file:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
     ? 'http://localhost:3000' 
@@ -403,17 +449,26 @@ const OPGG_SERVER = (window.location.protocol === 'file:' || window.location.hos
 
 async function startOpggSync() {
     const role = state.currentRole;
+    
+    // Build list of tasks {champId, role}
+    let tasks = [];
     if (role === 'all') {
-        alert('먼저 상단에서 라인(TOP/MID 등)을 선택해주세요.');
-        return;
+        // For ALL, get every champion in pool and their registered roles
+        for (const [champId, roles] of Object.entries(state.userData.pool)) {
+            roles.forEach(r => {
+                tasks.push({ champId, role: r });
+            });
+        }
+    } else {
+        // For specific role
+        const roleChamps = getChampionsForCurrentRole();
+        roleChamps.forEach(c => {
+            tasks.push({ champId: c.id, role: role });
+        });
     }
     
-    // Get ALL champions for the selected role
-    const roleChamps = getChampionsForCurrentRole();
-    const targetPool = roleChamps.map(c => c.id);
-    
-    if (targetPool.length === 0) {
-        alert(`${role.toUpperCase()} 라인에 해당하는 챔피언이 없습니다.`);
+    if (tasks.length === 0) {
+        alert(role === 'all' ? '등록된 챔피언이 없습니다.' : `${role.toUpperCase()} 라인에 등록된 챔피언이 없습니다.`);
         return;
     }
     
@@ -421,7 +476,7 @@ async function startOpggSync() {
     try {
         const testRes = await fetch(OPGG_SERVER, { mode: 'cors' });
     } catch(e) {
-        alert('⚠️ OP.GG 스크래핑 서버가 실행되고 있지 않습니다.\n\nstart_server.bat 파일을 더블클릭해서 서버를 먼저 실행해주세요.');
+        alert('⚠️ OP.GG 스크래핑 서버가 응답하지 않습니다.');
         return;
     }
     
@@ -431,10 +486,12 @@ async function startOpggSync() {
         if (cacheRes.ok) {
             const cacheData = await cacheRes.json();
             const roleMap = { top: 'top', jungle: 'jungle', mid: 'mid', adc: 'adc', support: 'support' };
-            const opggRole = roleMap[role];
             let updatedCount = 0;
             
-            for (const champId of targetPool) {
+            for (const task of tasks) {
+                const opggRole = roleMap[task.role];
+                const champId = task.champId;
+                
                 if (cacheData.matchups[champId] && cacheData.matchups[champId][opggRole]) {
                     if (!state.userData.matchups[champId]) state.userData.matchups[champId] = {};
                     
@@ -454,7 +511,7 @@ async function startOpggSync() {
             
             if (updatedCount > 0) {
                 saveUserData();
-                alert(`✅ 서버에 캐시된 최신 OP.GG 데이터를 즉시 적용했습니다.\n(업데이트된 챔피언 수: ${updatedCount})`);
+                alert(`✅ 서버에 캐시된 최신 OP.GG 데이터를 즉시 적용했습니다.\n(적용된 매치업 챔피언 수: ${updatedCount})`);
                 if (els.mainView.classList.contains('active')) renderMainView();
                 return;
             }
@@ -464,38 +521,38 @@ async function startOpggSync() {
     }
     
     // Fallback: Create and show sync modal for live scraping
-    showSyncModal(targetPool, role);
+    showSyncModal(tasks, role);
 }
 
-function showSyncModal(champions, role) {
+function showSyncModal(tasks, modeRole) {
     // Create overlay
     const overlay = document.createElement('div');
     overlay.id = 'opgg-sync-overlay';
     overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:10000;display:flex;align-items:center;justify-content:center;';
     
-    const roleMap = { top: 'TOP', jungle: 'JUNGLE', mid: 'MID', adc: 'ADC', support: 'SUPPORT' };
+    const roleMap = { top: 'TOP', jungle: 'JUNGLE', mid: 'MID', adc: 'ADC', support: 'SUPPORT', all: '전체' };
     
     const modal = document.createElement('div');
     modal.style.cssText = 'background:#1a1a2e;border-radius:12px;padding:24px;min-width:400px;max-width:600px;color:white;box-shadow:0 8px 32px rgba(0,0,0,0.5);';
     
     modal.innerHTML = `
         <h2 style="margin:0 0 8px 0;color:#00a8ff;font-size:18px;">🔄 OP.GG 데이터 최신화</h2>
-        <p style="margin:0 0 16px 0;color:#aaa;font-size:13px;">${roleMap[role]} 라인의 모든 챔피언에 대해 카운터 데이터를 OP.GG에서 가져옵니다.</p>
+        <p style="margin:0 0 16px 0;color:#aaa;font-size:13px;">${roleMap[modeRole]} 라인의 챔피언들에 대해 카운터 데이터를 가져옵니다.</p>
         
         <div id="sync-champ-list" style="max-height:300px;overflow-y:auto;margin-bottom:16px;">
-            ${champions.map(champId => {
+            ${tasks.map((task, index) => {
+                const champId = task.champId;
+                const r = task.role;
                 const champData = state.championsData[champId];
                 const name = champData ? champData.name : champId;
                 const imgUrl = champData ? `https://ddragon.leagueoflegends.com/cdn/${state.version}/img/champion/${champId}.png` : '';
-                const existingCount = state.userData.matchups[champId] ? Object.keys(state.userData.matchups[champId]).length : 0;
                 return `
                     <label style="display:flex;align-items:center;padding:8px;border-radius:8px;cursor:pointer;margin-bottom:4px;background:#16213e;transition:background 0.2s;" 
                            onmouseover="this.style.background='#1a3050'" onmouseout="this.style.background='#16213e'">
-                        <input type="checkbox" value="${champId}" checked style="margin-right:10px;width:18px;height:18px;accent-color:#00a8ff;">
+                        <input type="checkbox" value="${index}" checked style="margin-right:10px;width:18px;height:18px;accent-color:#00a8ff;">
                         <img src="${imgUrl}" style="width:36px;height:36px;border-radius:50%;margin-right:10px;">
                         <div>
-                            <div style="font-weight:bold;font-size:14px;">${name}</div>
-                            <div style="font-size:11px;color:#888;">현재 ${existingCount}개 매치업 데이터</div>
+                            <div style="font-weight:bold;font-size:14px;">${name} <span style="color:#00a8ff;font-size:12px;">(${roleMap[r]})</span></div>
                         </div>
                     </label>
                 `;
@@ -538,18 +595,19 @@ function showSyncModal(champions, role) {
     // Event: Start sync
     document.getElementById('sync-start-btn').addEventListener('click', () => {
         const checkboxes = overlay.querySelectorAll('#sync-champ-list input[type="checkbox"]:checked');
-        const selectedChamps = Array.from(checkboxes).map(cb => cb.value);
+        const selectedIndices = Array.from(checkboxes).map(cb => parseInt(cb.value));
+        const selectedTasks = selectedIndices.map(i => tasks[i]);
         
-        if (selectedChamps.length === 0) {
-            alert('최소 한 개의 챔피언을 선택해주세요.');
+        if (selectedTasks.length === 0) {
+            alert('최소 한 개의 항목을 선택해주세요.');
             return;
         }
         
-        executeSyncBatch(selectedChamps, role, overlay);
+        executeSyncBatch(selectedTasks, overlay);
     });
 }
 
-async function executeSyncBatch(champions, role, overlay) {
+async function executeSyncBatch(tasks, overlay) {
     const champListDiv = document.getElementById('sync-champ-list');
     const progressDiv = document.getElementById('sync-progress');
     const buttonsDiv = document.getElementById('sync-buttons');
@@ -564,17 +622,18 @@ async function executeSyncBatch(champions, role, overlay) {
     buttonsDiv.innerHTML = '<button id="sync-close-btn" style="padding:8px 20px;border:none;border-radius:6px;background:#444;color:white;cursor:pointer;" disabled>완료 대기 중...</button>';
     
     const roleMap = { top: 'top', jungle: 'jungle', mid: 'mid', adc: 'adc', support: 'support' };
-    const opggRole = roleMap[role];
     
     let completed = 0;
     let totalUpdated = 0;
-    const total = champions.length;
+    const total = tasks.length;
     
-    for (const champId of champions) {
+    for (const task of tasks) {
+        const champId = task.champId;
+        const opggRole = roleMap[task.role];
         const champData = state.championsData[champId];
         const champName = champData ? champData.name : champId;
         
-        statusEl.textContent = `${champName} 스크래핑 중...`;
+        statusEl.textContent = `${champName} (${task.role.toUpperCase()}) 스크래핑 중...`;
         countEl.textContent = `${completed} / ${total}`;
         
         const logLine = (msg, color = '#888') => {
@@ -586,7 +645,7 @@ async function executeSyncBatch(champions, role, overlay) {
         };
         
         try {
-            logLine(`▶ ${champName} (${champId}) 데이터 요청 중...`);
+            logLine(`▶ ${champName} (${champId}) ${task.role} 데이터 요청 중...`);
             
             const res = await fetch(`${OPGG_SERVER}/api/scrape?champion=${champId.toLowerCase()}&role=${opggRole}`);
             
