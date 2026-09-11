@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LoL 나만의 픽 시스템</title>
-    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="icon" type="image/png" href="icon_rounded.png">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -22,6 +22,9 @@
             <button id="mode-toggle-btn" class="control-btn" style="margin-left: 10px; background: var(--primary);">데이터 입력 모드</button>
             <button id="opgg-sync-btn" class="control-btn" style="margin-left: 10px; background: #00a8ff; color: white;">OP.GG 최신화</button>
             <button id="reset-btn" class="control-btn" style="margin-left: 10px;">초기화</button>
+            <button onclick="exportData()" class="control-btn" style="margin-left: 10px; background: #2ecc71;">내보내기</button>
+            <button onclick="document.getElementById('importFile').click()" class="control-btn" style="margin-left: 10px; background: #27ae60;">불러오기</button>
+            <input type="file" id="importFile" style="display: none;" accept=".json" onchange="importData(event)">
         </header>
 
         <!-- 메인 픽 화면 -->
@@ -110,6 +113,7 @@
         <main id="data-entry-view" class="view hidden">
             <!-- 왼쪽: 전체 챔피언 (분류용) -->
             <section class="data-section left-data">
+
                 <div class="section-header">
                     <h2>모든 챔피언</h2>
                     <button class="add-role-btn" id="add-to-role-btn">현재 포지션에 추가</button>
