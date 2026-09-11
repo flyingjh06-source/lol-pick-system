@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoL 나만의 픽 시스템</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- 상단 포지션 선택 헤더 -->
+        <header class="role-selector">
+            <button class="role-btn active" data-role="all">ALL</button>
+            <button class="role-btn" data-role="top">TOP</button>
+            <button class="role-btn" data-role="jungle">JUNGLE</button>
+            <button class="role-btn" data-role="mid">MID</button>
+            <button class="role-btn" data-role="adc">ADC</button>
+            <button class="role-btn" data-role="support">SUPPORT</button>
+            <button id="login-btn" class="control-btn" style="margin-left: auto; background: #9b59b6;">로그인 (Guest)</button>
+            <button id="mode-toggle-btn" class="control-btn" style="margin-left: 10px; background: var(--primary);">데이터 입력 모드</button>
+            <button id="opgg-sync-btn" class="control-btn" style="margin-left: 10px; background: #00a8ff; color: white;">OP.GG 최신화</button>
+            <button id="reset-btn" class="control-btn" style="margin-left: 10px;">초기화</button>
+        </header>
+
+        <!-- 메인 픽 화면 -->
+        <main id="main-view" class="view active">
+            <!-- 선택 모드 (상대 1명, 내 챔피언 1명 고르기 전) -->
+            <div id="selection-mode" class="split-view">
+                <!-- 왼쪽: 상대 챔피언 리스트 -->
+                <section class="champion-section">
+                    <h2>상대 챔피언 (Opponent)</h2>
+                    <div class="search-bar">
+                        <input type="text" id="opp-search" placeholder="챔피언 검색...">
+                    </div>
+                    <div class="champion-grid" id="opp-champion-grid">
+                        <!-- JS로 렌더링 -->
+                    </div>
+                </section>
+
+                <!-- 오른쪽: 내 챔피언 풀 리스트 -->
+                <section class="champion-section">
+                    <h2>내 챔피언 (My Pool)</h2>
+                    <div class="champion-grid" id="my-champion-grid">
+                        <!-- JS로 렌더링 -->
+                    </div>
+                </section>
+            </div>
+
+            <!-- 매치업 상세 모드 (둘 다 고른 후) -->
+            <div id="matchup-mode" class="split-view hidden">
+                <!-- 왼쪽: 스킬 쿨타임 정보 -->
+                <section class="matchup-section">
+                    <div class="matchup-header">
+                        <button id="back-to-selection-btn" class="control-btn" style="background: var(--text-muted);">선택 취소</button>
+                        <h2 style="display: flex; align-items: center; gap: 10px; margin-bottom: 0;">스킬 쿨타임 비교 <div class="difficulty-badge" id="matchup-difficulty" style="font-size: 14px; padding: 4px 8px; font-weight: bold; border-radius: 6px; white-space: nowrap;">난이도: ?</div></h2>
+                        <div style="width: 80px;"></div> <!-- Spacer -->
+                    </div>
+                    
+                    <div class="cooldowns-comparison">
+                        <!-- 상대 챔피언 스킬 -->
+                        <div class="cooldown-col" id="opp-cooldowns-col">
+                            <div class="champ-header">
+                                <img id="matchup-opp-img" src="" alt="Opponent">
+                                <h3 id="matchup-opp-name">상대 챔피언</h3>
+                            </div>
+                            <div id="opp-skills-list" class="skills-list"></div>
+                        </div>
+                        
+                        <!-- 내 챔피언 스킬 -->
+                        <div class="cooldown-col" id="my-cooldowns-col">
+                            <div class="champ-header">
+                                <img id="matchup-my-img" src="" alt="My Champ">
+                                <div>
+                                    <h3 id="matchup-my-name">내 챔피언</h3>
+                                </div>
+                            </div>
+                            <div id="my-skills-list" class="skills-list"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 오른쪽: AI 요약 및 코멘트 -->
+                <section class="matchup-section">
+                    <h2>매치업 전략 (AI & 코멘트)</h2>
+                    
+                    <div class="ai-summary-container">
+                        <div class="ai-header">
+                            <h3>AI 핵심 운영 요약</h3>
+                            <button id="generate-ai-btn" class="ai-btn">AI 요약 생성 (Gemini)</button>
+                        </div>
+                        <div id="ai-loading" class="hidden" style="margin: 10px 0; color: var(--accent);">AI가 분석 중입니다... 잠시만 기다려주세요.</div>
+                        <div id="ai-result" class="ai-content">
+                            <!-- AI 요약 내용 표시 공간 -->
+                            <p class="text-muted" style="color: var(--text-muted); font-size: 14px;">아직 생성된 요약이 없습니다. 'AI 요약 생성' 버튼을 눌러주세요.</p>
+                        </div>
+                    </div>
+
+                    <div class="comments-container" style="margin-top: 20px;">
+                        <h4>피드백 / 코멘트</h4>
+                        <textarea id="champ-comment" placeholder="이 챔피언 상성에 대한 코멘트를 작성하세요..."></textarea>
+                        <button id="save-comment-btn">저장</button>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- 데이터 입력 화면 -->
+        <main id="data-entry-view" class="view hidden">
+            <!-- 왼쪽: 전체 챔피언 (분류용) -->
+            <section class="data-section left-data">
+                <div class="section-header">
+                    <h2>모든 챔피언</h2>
+                    <button class="add-role-btn" id="add-to-role-btn">현재 포지션에 추가</button>
+                </div>
+                <div class="search-bar">
+                    <input type="text" id="data-all-search" placeholder="챔피언 검색...">
+                </div>
+                <div class="champion-grid compact-grid" id="data-all-champions">
+                    <!-- JS 렌더링 -->
+                </div>
+            </section>
+            
+            <!-- 중앙: 내 챔피언 (해당 포지션) -->
+            <section class="data-section center-data">
+                <div class="section-header">
+                    <h2>내 챔피언 (기준점)</h2>
+                    <button class="add-role-btn" id="add-to-my-pool-btn">내 챔피언에 추가</button>
+                </div>
+                <div class="champion-grid compact-grid" id="data-my-champions">
+                    <!-- JS 렌더링 -->
+                </div>
+            </section>
+
+            <!-- 오른쪽: 티어 리스트 (Drag & Drop) -->
+            <section class="data-section right-data tier-list-section">
+                <h2>상성 티어 분류 <span id="tier-reference-container" class="hidden">(기준: <span id="tier-reference-name"></span>)</span></h2>
+                <div class="tier-container">
+                    <div class="tier-row">
+                        <div class="tier-label tier-1">1 (쉬움)</div>
+                        <div class="tier-dropzone" data-tier="1" id="tier-1-zone"></div>
+                    </div>
+                    <div class="tier-row">
+                        <div class="tier-label tier-2">2 (보통)</div>
+                        <div class="tier-dropzone" data-tier="2" id="tier-2-zone"></div>
+                    </div>
+                    <div class="tier-row">
+                        <div class="tier-label tier-3">3 (어려움)</div>
+                        <div class="tier-dropzone" data-tier="3" id="tier-3-zone"></div>
+                    </div>
+                    <div class="tier-row">
+                        <div class="tier-label tier-unknown">? (정보없음)</div>
+                        <div class="tier-dropzone" data-tier="?" id="tier-unknown-zone"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- 챔피언 선택 모달 (분류 추가 시 사용) -->
+        <div id="selection-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2 id="modal-title">챔피언 추가</h2>
+                <div class="champion-grid modal-grid" id="modal-champion-grid">
+                    <!-- JS 렌더링 -->
+                </div>
+                <div class="modal-actions">
+                    <button id="modal-cancel-btn">취소</button>
+                    <button id="modal-confirm-btn">추가하기</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 인증 모달 (로그인/회원가입) -->
+        <div id="auth-modal" class="modal hidden">
+            <div class="modal-content" style="max-width: 400px; text-align: center; position: relative;">
+                <button id="auth-close-btn" style="position: absolute; top: 10px; right: 15px; background: none; border: none; font-size: 24px; color: #aaa; cursor: pointer; padding: 5px;">&times;</button>
+                <h2 id="auth-modal-title">로그인</h2>
+                <div style="display: flex; flex-direction: column; gap: 15px; margin: 20px 0;">
+                    <input type="text" id="auth-username" placeholder="아이디" style="padding: 10px; border-radius: 5px; border: 1px solid #ccc; font-size: 16px;">
+                    <input type="password" id="auth-password" placeholder="비밀번호" style="padding: 10px; border-radius: 5px; border: 1px solid #ccc; font-size: 16px;">
+                </div>
+                <div id="auth-error-msg" style="color: red; margin-bottom: 10px; font-size: 14px; min-height: 20px;"></div>
+                
+                <div class="modal-actions" style="justify-content: center; flex-direction: column; gap: 10px;">
+                    <button id="auth-submit-btn" style="width: 100%; background: #00a8ff; padding: 12px; font-size: 16px;">로그인</button>
+                    <button id="auth-switch-btn" class="control-btn" style="width: 100%; background: transparent; color: #aaa; padding: 5px; border: none;">회원가입이 필요하신가요?</button>
+                    <button id="auth-guest-btn" class="control-btn" style="width: 100%; background: transparent; color: #aaa; padding: 5px; border: none; text-decoration: underline;">Guest로 계속하기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
