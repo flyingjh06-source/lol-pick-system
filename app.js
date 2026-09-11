@@ -396,51 +396,41 @@ function saveUserData() {
     localStorage.setItem(key, JSON.stringify(state.userData));
 }
 
-// Data Export/Import
-window.exportData = function() {
-    const dataStr = JSON.stringify(state.userData, null, 2);
-    const blob = new Blob([dataStr], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `lol_pick_system_backup_${state.currentUser}.json`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-};
+// PWA Install Logic
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent the mini-infobar from appearing on mobile
+    e.preventDefault();
+    // Stash the event so it can be triggered later.
+    deferredPrompt = e;
+});
 
-window.importData = function(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-    
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        try {
-            const parsed = JSON.parse(e.target.result);
-            if (parsed.pool && parsed.matchups) {
-                state.userData.pool = parsed.pool;
-                state.userData.matchups = parsed.matchups;
-                if(parsed.apiKey) state.userData.apiKey = parsed.apiKey;
-                
-                saveUserData();
-                if (state.isDataEntryMode) {
-                    renderDataEntryView();
-                } else {
-                    renderMainView();
-                }
-                alert('데이터 불러오기가 완료되었습니다!');
+document.addEventListener('DOMContentLoaded', () => {
+    const installBtn = document.getElementById('install-app-btn');
+    if (installBtn) {
+        installBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                // Show the install prompt
+                deferredPrompt.prompt();
+                // Wait for the user to respond to the prompt
+                const { outcome } = await deferredPrompt.userChoice;
+                // We've used the prompt, and can't use it again, throw it away
+                deferredPrompt = null;
             } else {
-                alert('올바른 백업 파일 형식이 아닙니다.');
+                // If PWA install is not available, download a .url shortcut file
+                const urlContent = `[InternetShortcut]\nURL=https://lol-pick-system.onrender.com\n`;
+                const blob = new Blob([urlContent], { type: "text/plain" });
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = "LoL픽시스템.url";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                alert('바탕화면 바로가기 파일이 다운로드 폴더에 저장되었습니다. 바탕화면으로 끌어다 놓으세요!');
             }
-        } catch (error) {
-            alert('파일을 읽는 중 오류가 발생했습니다.');
-        }
-        event.target.value = ''; // Reset input
-    };
-    reader.readAsText(file);
-};
+        });
+    }
+});
 
 // OP.GG Data Sync Feature
 const OPGG_SERVER = (window.location.protocol === 'file:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')

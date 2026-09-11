@@ -1,0 +1,17 @@
+{
+    "name": "LoL 픽 시스템",
+    "short_name": "픽 시스템",
+    "description": "LoL 나만의 픽 시스템",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#0a0a0c",
+    "theme_color": "#00a8ff",
+    "icons": [
+        {
+            "src": "icon_rounded.png",
+            "sizes": "256x256",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}
