@@ -972,9 +972,9 @@ function renderMainView() {
             grouped[tier].forEach(champ => {
                 const el = createChampionCard(champ);
                 
-                // Add bee icon for 55%+ win rate matchups
+                // Add bee icon for 54%+ win rate matchups
                 const matchData = state.userData.matchups[champ.id]?.[state.mainView.selectedOpponent];
-                if (matchData && matchData.opggWinRate > 55) {
+                if (matchData && matchData.opggWinRate > 54) {
                     const bee = document.createElement('img');
                     bee.src = 'bee.png';
                     bee.className = 'bee-icon';
