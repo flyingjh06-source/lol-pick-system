@@ -1185,8 +1185,8 @@ async function showMatchupDetails(oppId, myId) {
     
     const matchupData = state.userData.matchups[myId]?.[oppId];
     const tier = matchupData?.tier || '?';
-    const winRate = matchupData?.opggWinRate ? `${matchupData.opggWinRate}%` : '정보 없음';
-    els.matchupDifficulty.textContent = `상대 승률: ${winRate}`;
+    const winRate = matchupData?.opggWinRate ? `${matchupData.opggWinRate}%` : '-';
+    els.matchupDifficulty.textContent = `승률: ${winRate}`;
     els.matchupDifficulty.className = `difficulty-badge tier-label tier-${tier === '?' ? 'unknown' : tier}`;
     
     // Render Cooldowns
