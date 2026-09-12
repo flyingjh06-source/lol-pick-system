@@ -34,9 +34,23 @@ async function scrollToLoadAll(page) {
         prevCount = currentCount;
         
         await page.evaluate(() => {
-            const scrollable = document.querySelector('div.h-\\[632px\\]') || document.querySelector('[class*="overflow-auto"]');
-            if (scrollable) {
-                scrollable.scrollTop = scrollable.scrollHeight;
+            window.scrollBy(0, 5000);
+            window.scrollTo(0, document.body.scrollHeight);
+            
+            // Try to find ANY scrollable div and scroll it down
+            const divs = document.querySelectorAll('div');
+            for(let div of divs) {
+                if (div.scrollHeight > div.clientHeight) {
+                    div.scrollTop = div.scrollHeight;
+                }
+            }
+            
+            // OP.GG sometimes uses a "더보기" (Show more) button
+            const buttons = document.querySelectorAll('button');
+            for (let btn of buttons) {
+                if (btn.textContent.includes('더보기') || btn.textContent.includes('Show more')) {
+                    btn.click();
+                }
             }
         });
         await new Promise(r => setTimeout(r, 2000));
