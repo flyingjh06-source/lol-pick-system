@@ -533,7 +533,7 @@ async function startOpggSync() {
                             state.userData.matchups[champId][oppId] = {
                                 ...state.userData.matchups[champId][oppId],
                                 tier: info.tier,
-                                opggWinRate: info.winRate,
+                                opggWinRate: info.opggWinRate,
                                 opggGames: info.games,
                                 opggUpdated: cacheData.updatedAt
                             };
@@ -710,7 +710,7 @@ async function executeSyncBatch(tasks, overlay) {
                 state.userData.matchups[champId][oppId] = {
                     ...state.userData.matchups[champId][oppId],
                     tier: info.tier,
-                    opggWinRate: info.winRate,
+                    opggWinRate: info.opggWinRate,
                     opggGames: info.games,
                     opggUpdated: new Date().toISOString()
                 };
