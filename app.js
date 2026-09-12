@@ -91,6 +91,24 @@ const els = {
 
 // Initialize
 async function init() {
+    const savedUser = localStorage.getItem('lol_pick_system_current_user') || 'Guest';
+    state.currentUser = savedUser;
+    
+    if (savedUser !== 'Guest') {
+        const loginBtn = document.getElementById('login-btn');
+        if (loginBtn) loginBtn.textContent = '동기화 중...';
+        try {
+            const res = await fetch('https://lol-pick-system.onrender.com/api/user/' + savedUser);
+            if (res.ok) {
+                const cloudData = await res.json();
+                if (cloudData && cloudData.roles) {
+                    const key = `lol_pick_system_data_${savedUser}`;
+                    localStorage.setItem(key, JSON.stringify(cloudData));
+                }
+            }
+        } catch(e) {}
+    }
+
     loadUserData();
     await fetchRiotData();
     setupEventListeners();
@@ -391,9 +409,21 @@ function loadUserData() {
     saveUserData();
 }
 
+let cloudSaveTimeout = null;
 function saveUserData() {
     const key = state.currentUser === 'Guest' ? 'lol_pick_system_data' : `lol_pick_system_data_${state.currentUser}`;
     localStorage.setItem(key, JSON.stringify(state.userData));
+
+    if (state.currentUser !== 'Guest') {
+        clearTimeout(cloudSaveTimeout);
+        cloudSaveTimeout = setTimeout(() => {
+            fetch('https://lol-pick-system.onrender.com/api/user/' + state.currentUser, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(state.userData)
+            }).catch(e => console.error('Cloud save failed', e));
+        }, 2000);
+    }
 }
 
 // PWA Install Logic
@@ -831,12 +861,38 @@ function setupEventListeners() {
         }
     });
     
-    function loginUser(username) {
+    async function loginUser(username) {
         state.currentUser = username;
-        localStorage.setItem('lol_pick_system_current_user', state.currentUser);
-        els.loginBtn.textContent = state.currentUser === 'Guest' ? '로그인 (Guest)' : `로그아웃 (${state.currentUser})`;
+        localStorage.setItem('lol_pick_system_current_user', username);
         
-        loadUserData();
+        if (username !== 'Guest') {
+            els.loginBtn.textContent = '동기화 중...';
+            try {
+                const res = await fetch('https://lol-pick-system.onrender.com/api/user/' + username);
+                if (res.ok) {
+                    const cloudData = await res.json();
+                    if (cloudData && cloudData.roles) {
+                        state.userData = cloudData;
+                        const key = `lol_pick_system_data_${username}`;
+                        localStorage.setItem(key, JSON.stringify(state.userData));
+                    } else {
+                        loadUserData();
+                        saveUserData();
+                    }
+                } else {
+                    loadUserData();
+                    saveUserData();
+                }
+            } catch(e) {
+                console.error(e);
+                loadUserData();
+            }
+        } else {
+            loadUserData();
+        }
+        
+        els.authModal.classList.add('hidden');
+        
         if (els.mainView.classList.contains('active')) {
             resetMainSelection();
             renderMainView();
@@ -844,6 +900,7 @@ function setupEventListeners() {
             state.dataView.selectedMyChamp = null;
             renderDataEntryView();
         }
+        els.loginBtn.textContent = username === 'Guest' ? '로그인 (Guest)' : `로그아웃 (${username})`;
     }
 
     els.modeToggleBtn.addEventListener('click', () => {

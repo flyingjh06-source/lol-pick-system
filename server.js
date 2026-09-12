@@ -214,7 +214,66 @@ async function runDailyScrape() {
         await browser.close();
         
         fsSync.writeFileSync(CACHE_FILE, JSON.stringify(cacheData));
-        console.log('[CRON] 전체 데이터 업데이트 및 저장 완료!');
+        console.log('[CRON] 로컬 캐시 파일 업데이트 완료!');
+        
+        // -----------------------------------------------------------------
+        // [NEW] 깃허브 자동 업로드 로직 추가
+        // -----------------------------------------------------------------
+        const githubToken = process.env.GITHUB_TOKEN;
+        if (githubToken) {
+            console.log('[CRON] 깃허브 자동 업로드를 시작합니다...');
+            try {
+                const repo = 'flyingjh06-source/lol-pick-system';
+                const filePath = 'opgg_cache.json';
+                
+                // 1. 기존 파일의 SHA 값(버전 정보) 가져오기
+                let sha = '';
+                try {
+                    const getRes = await fetch(`https://api.github.com/repos/${repo}/contents/${filePath}`, {
+                        headers: {
+                            'Authorization': `token ${githubToken}`,
+                            'User-Agent': 'LoL-Pick-System-Bot'
+                        }
+                    });
+                    if (getRes.ok) {
+                        const getJson = await getRes.json();
+                        sha = getJson.sha;
+                    }
+                } catch(e) {
+                    console.log('[CRON] 기존 파일을 찾을 수 없습니다. 새로 생성합니다.');
+                }
+                
+                // 2. 새 데이터 덮어쓰기 (Base64 인코딩)
+                const contentBase64 = Buffer.from(JSON.stringify(cacheData, null, 2)).toString('base64');
+                
+                const putRes = await fetch(`https://api.github.com/repos/${repo}/contents/${filePath}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${githubToken}`,
+                        'User-Agent': 'LoL-Pick-System-Bot',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: '봇: 새벽 4시 OP.GG 캐시 자동 업데이트 [skip ci]',
+                        content: contentBase64,
+                        sha: sha ? sha : undefined
+                    })
+                });
+                
+                if (putRes.ok) {
+                    console.log('[CRON] 깃허브 자동 업로드 성공! 이제 서버가 잠들어도 안전합니다.');
+                } else {
+                    const errorText = await putRes.text();
+                    console.error('[CRON] 깃허브 업로드 실패:', errorText);
+                }
+            } catch (err) {
+                console.error('[CRON] 깃허브 API 통신 에러:', err);
+            }
+        } else {
+            console.log('[CRON] GITHUB_TOKEN이 설정되지 않아 깃허브 업로드는 건너뜁니다.');
+        }
+        
+        console.log('[CRON] 전체 데이터 업데이트 및 저장 프로세스 완료!');
         
     } catch(err) {
         console.error('[CRON] 브라우저 실행 에러:', err);
@@ -375,6 +434,80 @@ app.post('/api/scrape-batch', async (req, res) => {
     }
     
     res.json({ results, errors });
+});
+
+app.get('/api/user/:username', async (req, res) => {
+    const username = req.params.username;
+    if (!username || username === 'Guest') return res.status(400).json({error: 'Invalid user'});
+    
+    const githubToken = process.env.GITHUB_TOKEN;
+    if (!githubToken) return res.status(500).json({error: 'GITHUB_TOKEN not configured'});
+    
+    const repo = 'flyingjh06-source/lol-pick-system';
+    const filePath = `users/${username}.json`;
+    
+    try {
+        const getRes = await fetch(`https://api.github.com/repos/${repo}/contents/${filePath}`, {
+            headers: { 'Authorization': `token ${githubToken}`, 'User-Agent': 'LoL-Pick-System-Bot' }
+        });
+        
+        if (getRes.ok) {
+            const getJson = await getRes.json();
+            const content = Buffer.from(getJson.content, 'base64').toString('utf8');
+            return res.json(JSON.parse(content));
+        } else {
+            return res.status(404).json({error: 'User not found'});
+        }
+    } catch(e) {
+        return res.status(500).json({error: e.message});
+    }
+});
+
+app.post('/api/user/:username', async (req, res) => {
+    const username = req.params.username;
+    if (!username || username === 'Guest') return res.status(400).json({error: 'Invalid user'});
+    
+    const githubToken = process.env.GITHUB_TOKEN;
+    if (!githubToken) return res.status(500).json({error: 'GITHUB_TOKEN not configured'});
+    
+    const repo = 'flyingjh06-source/lol-pick-system';
+    const filePath = `users/${username}.json`;
+    const userData = req.body;
+    
+    try {
+        let sha = '';
+        const getRes = await fetch(`https://api.github.com/repos/${repo}/contents/${filePath}`, {
+            headers: { 'Authorization': `token ${githubToken}`, 'User-Agent': 'LoL-Pick-System-Bot' }
+        });
+        if (getRes.ok) {
+            const getJson = await getRes.json();
+            sha = getJson.sha;
+        }
+        
+        const contentBase64 = Buffer.from(JSON.stringify(userData, null, 2)).toString('base64');
+        const putRes = await fetch(`https://api.github.com/repos/${repo}/contents/${filePath}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `token ${githubToken}`,
+                'User-Agent': 'LoL-Pick-System-Bot',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                message: `Update user data for ${username}`,
+                content: contentBase64,
+                sha: sha || undefined
+            })
+        });
+        
+        if (putRes.ok) {
+            return res.json({success: true});
+        } else {
+            const err = await putRes.text();
+            return res.status(putRes.status).json({error: err});
+        }
+    } catch(e) {
+        return res.status(500).json({error: e.message});
+    }
 });
 
 app.listen(PORT, () => {
