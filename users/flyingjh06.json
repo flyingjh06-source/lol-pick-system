@@ -267,7 +267,7 @@
         "opggWinRate": 40
       },
       "Nasus": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 87,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 49.43
@@ -285,7 +285,7 @@
         "opggWinRate": 46.77
       },
       "Gangplank": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 67,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 44.78
@@ -306,7 +306,7 @@
         "tier": "3"
       },
       "Mordekaiser": {
-        "tier": "3",
+        "tier": "1",
         "opggGames": 30,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 43.33
@@ -318,7 +318,7 @@
         "opggWinRate": 46.55
       },
       "Aatrox": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 47,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 51.06
@@ -339,13 +339,13 @@
         "tier": "3"
       },
       "Gnar": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 33,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 54.55
       },
       "KSante": {
-        "tier": "3",
+        "tier": "1",
         "opggGames": 55,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 36.36
@@ -354,7 +354,7 @@
         "tier": "3"
       },
       "Gwen": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 30,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 50
@@ -399,7 +399,7 @@
         "tier": "1"
       },
       "Olaf": {
-        "tier": "3",
+        "tier": "1",
         "opggGames": 30,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 33.33
@@ -584,7 +584,7 @@
     },
     "Zac": {
       "Yone": {
-        "tier": "3",
+        "tier": "1",
         "opggGames": 34,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 41.18
@@ -674,7 +674,7 @@
         "tier": "2"
       },
       "Chogath": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 70,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 60
@@ -1394,13 +1394,13 @@
     },
     "Vladimir": {
       "Yasuo": {
-        "tier": "3",
+        "tier": "1",
         "opggGames": 41,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 46.34
       },
       "Katarina": {
-        "tier": "3",
+        "tier": "1",
         "opggGames": 35,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 42.86
@@ -1415,7 +1415,7 @@
         "tier": "1"
       },
       "Orianna": {
-        "tier": "3",
+        "tier": "1",
         "opggGames": 32,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 37.5
@@ -1466,31 +1466,31 @@
         "tier": "1"
       },
       "Zed": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 43,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 58.14
       },
       "Ahri": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 56,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 46.43
       },
       "Viktor": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 49,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 61.22
       },
       "Locke": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 42,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 45.24
       },
       "Sylas": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 52,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 59.62
@@ -1505,19 +1505,19 @@
         "tier": "2"
       },
       "Akali": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 30,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 53.33
       },
       "TwistedFate": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 45,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 53.33
       },
       "Ryze": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 37,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 43.24
@@ -1574,7 +1574,7 @@
         "tier": "2"
       },
       "Syndra": {
-        "tier": "1",
+        "tier": "3",
         "opggGames": 33,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 54.55
@@ -1621,7 +1621,7 @@
         "opggWinRate": 52.46
       },
       "Malzahar": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 73,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 49.32
@@ -1633,13 +1633,13 @@
         "opggWinRate": 53.08
       },
       "Ryze": {
-        "tier": "3",
+        "tier": "1",
         "opggGames": 167,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 46.11
       },
       "Vex": {
-        "tier": "3",
+        "tier": "1",
         "opggGames": 85,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 45.88
@@ -1690,7 +1690,7 @@
         "opggWinRate": 50.97
       },
       "Yone": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 298,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 52.01
@@ -1711,73 +1711,73 @@
         "opggWinRate": 50.94
       },
       "TwistedFate": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 263,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 42.97
       },
       "Katarina": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 137,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 42.34
       },
       "Hwei": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 175,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 46.29
       },
       "Lissandra": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 128,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 46.88
       },
       "Lux": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 72,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 52.78
       },
       "Galio": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 208,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 52.4
       },
       "Veigar": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 51,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 45.1
       },
       "Vladimir": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 49,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 38.78
       },
       "Diana": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 93,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 60.22
       },
       "Irelia": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 120,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 52.5
       },
       "Ekko": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 76,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 59.21
       },
       "Qiyana": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 56,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 46.43
@@ -1789,31 +1789,31 @@
         "opggWinRate": 48.11
       },
       "Anivia": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 96,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 53.13
       },
       "Kassadin": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 64,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 57.81
       },
       "Nasus": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 76,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 55.26
       },
       "Akshan": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 40,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 60
       },
       "Aurora": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 70,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 61.43
@@ -1825,13 +1825,13 @@
         "opggWinRate": 51.9
       },
       "Talon": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 63,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 53.97
       },
       "Taliyah": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 54,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 61.11
@@ -1840,7 +1840,7 @@
         "tier": "2"
       },
       "Jayce": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 39,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 58.97
@@ -1864,7 +1864,7 @@
         "tier": "2"
       },
       "Xerath": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 206,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 50.49
@@ -1914,7 +1914,7 @@
     },
     "Anivia": {
       "Yasuo": {
-        "tier": "3",
+        "tier": "1",
         "opggGames": 32,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 37.5
@@ -1971,19 +1971,19 @@
         "tier": "1"
       },
       "Viktor": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 96,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 46.88
       },
       "Syndra": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 68,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 52.94
       },
       "Zed": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 37,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 45.95
@@ -1995,13 +1995,13 @@
         "opggWinRate": 48.89
       },
       "Locke": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 66,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 45.45
       },
       "Sylas": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 55,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 47.27
@@ -2022,7 +2022,7 @@
         "tier": "2"
       },
       "Orianna": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 38,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 60.53
@@ -2070,7 +2070,7 @@
         "tier": "2"
       },
       "Ahri": {
-        "tier": "1",
+        "tier": "3",
         "opggGames": 54,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 57.41
@@ -2091,7 +2091,7 @@
         "opggWinRate": 47.5
       },
       "Hwei": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 42,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 50
@@ -2144,7 +2144,7 @@
         "opggWinRate": 56.9
       },
       "Yone": {
-        "tier": "3",
+        "tier": "1",
         "opggGames": 58,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 41.38
@@ -2201,13 +2201,13 @@
         "tier": "1"
       },
       "Ahri": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 58,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 41.38
       },
       "Zed": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 56,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 37.5
@@ -2219,7 +2219,7 @@
         "opggWinRate": 51.89
       },
       "Locke": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 54,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 46.3
@@ -2234,13 +2234,13 @@
         "opggWinRate": 50
       },
       "Lissandra": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 31,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 41.94
       },
       "Akali": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 45,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 68.89
@@ -2255,7 +2255,7 @@
         "tier": "2"
       },
       "Galio": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 41,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 65.85
@@ -2282,13 +2282,13 @@
         "tier": "2"
       },
       "Yasuo": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 44,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 50
       },
       "Katarina": {
-        "tier": "1",
+        "tier": "3",
         "opggGames": 51,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 60.78
@@ -2368,7 +2368,7 @@
         "opggWinRate": 53.57
       },
       "Lissandra": {
-        "tier": "3",
+        "tier": "1",
         "opggGames": 43,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 39.53
@@ -2380,7 +2380,7 @@
         "opggWinRate": 62.5
       },
       "Akali": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 56,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 51.79
@@ -2401,13 +2401,13 @@
         "opggWinRate": 64.71
       },
       "Orianna": {
-        "tier": "3",
+        "tier": "1",
         "opggGames": 53,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 41.51
       },
       "Anivia": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 42,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 50
@@ -2416,13 +2416,13 @@
         "tier": "1"
       },
       "Nasus": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 38,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 50
       },
       "Irelia": {
-        "tier": "3",
+        "tier": "1",
         "opggGames": 46,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 32.61
@@ -2461,49 +2461,49 @@
         "tier": "1"
       },
       "Viktor": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 175,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 53.71
       },
       "Syndra": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 98,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 45.92
       },
       "Ahri": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 93,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 40.86
       },
       "Yasuo": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 51,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 56.86
       },
       "Zed": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 68,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 42.65
       },
       "Xerath": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 67,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 43.28
       },
       "Locke": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 75,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 53.33
       },
       "Katarina": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 49,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 44.9
@@ -2679,7 +2679,7 @@
         "tier": "3"
       },
       "Yone": {
-        "tier": "1",
+        "tier": "3",
         "opggGames": 97,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 53.61
@@ -2697,7 +2697,7 @@
         "tier": "3"
       },
       "Nasus": {
-        "tier": "1",
+        "tier": "3",
         "opggGames": 57,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 52.63
@@ -2792,25 +2792,25 @@
         "opggWinRate": 58.49
       },
       "Yasuo": {
-        "tier": "3",
+        "tier": "1",
         "opggGames": 38,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 47.37
       },
       "Sion": {
-        "tier": "3",
+        "tier": "1",
         "opggGames": 49,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 38.78
       },
       "Akali": {
-        "tier": "3",
+        "tier": "1",
         "opggGames": 51,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 45.1
       },
       "Gragas": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 50,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 48
@@ -2837,13 +2837,13 @@
         "opggWinRate": 50.74
       },
       "Jayce": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 179,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 46.37
       },
       "Renekton": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 106,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 43.4
@@ -2855,7 +2855,7 @@
         "opggWinRate": 48.39
       },
       "Gangplank": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 170,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 44.71
@@ -2867,13 +2867,13 @@
         "opggWinRate": 51.14
       },
       "Sett": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 44,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 47.73
       },
       "Garen": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 48,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 45.83
@@ -2885,31 +2885,31 @@
         "opggWinRate": 51.61
       },
       "Mordekaiser": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 51,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 43.14
       },
       "Fiora": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 87,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 45.98
       },
       "Camille": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 78,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 53.85
       },
       "KSante": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 92,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 47.83
       },
       "Teemo": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 55,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 52.73
@@ -2921,7 +2921,7 @@
         "opggWinRate": 50
       },
       "Gnar": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 52,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 53.85
@@ -2966,13 +2966,13 @@
         "tier": "2"
       },
       "Vayne": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 47,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 61.7
       },
       "Rumble": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 62,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 54.84
@@ -3008,7 +3008,7 @@
         "opggWinRate": 45.98
       },
       "Ambessa": {
-        "tier": "1",
+        "tier": "3",
         "opggGames": 67,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 55.22
@@ -3023,13 +3023,13 @@
         "tier": "3"
       },
       "Yorick": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 49,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 51.02
       },
       "Singed": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 38,
         "opggUpdated": "2026-09-12T01:04:21.701Z",
         "opggWinRate": 50
