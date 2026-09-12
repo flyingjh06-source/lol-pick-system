@@ -8,7 +8,7 @@ const https = require('https');
 
 const app = express();
 app.use(cors());
-app.use(express.json());
+app.use(express.json({limit: '10mb'}));
 
 // Serve static files (index.html, app.js, style.css, etc.)
 app.use(express.static(__dirname));
