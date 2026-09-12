@@ -266,7 +266,7 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Nasus": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 87,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -281,7 +281,7 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Gangplank": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 67,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -300,7 +300,7 @@
         "tier": "3"
       },
       "Mordekaiser": {
-        "tier": "1",
+        "tier": "3",
         "opggGames": 30,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -310,7 +310,7 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Aatrox": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 47,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -329,12 +329,12 @@
         "tier": "3"
       },
       "Gnar": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 33,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "KSante": {
-        "tier": "1",
+        "tier": "3",
         "opggGames": 55,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -342,7 +342,7 @@
         "tier": "3"
       },
       "Gwen": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 30,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -386,7 +386,7 @@
         "tier": "1"
       },
       "Olaf": {
-        "tier": "1",
+        "tier": "3",
         "opggGames": 30,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -569,7 +569,7 @@
     },
     "Zac": {
       "Yone": {
-        "tier": "1",
+        "tier": "3",
         "opggGames": 34,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -658,7 +658,7 @@
         "tier": "2"
       },
       "Chogath": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 70,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -1353,12 +1353,12 @@
     },
     "Vladimir": {
       "Yasuo": {
-        "tier": "1",
+        "tier": "3",
         "opggGames": 41,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Katarina": {
-        "tier": "1",
+        "tier": "3",
         "opggGames": 35,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -1371,7 +1371,7 @@
         "tier": "1"
       },
       "Orianna": {
-        "tier": "1",
+        "tier": "3",
         "opggGames": 32,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -1421,27 +1421,27 @@
         "tier": "1"
       },
       "Zed": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 43,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Ahri": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 56,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Viktor": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 49,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Locke": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 42,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Sylas": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 52,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -1455,17 +1455,17 @@
         "tier": "2"
       },
       "Akali": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 30,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "TwistedFate": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 45,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Ryze": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 37,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -1521,7 +1521,7 @@
         "tier": "2"
       },
       "Syndra": {
-        "tier": "3",
+        "tier": "1",
         "opggGames": 33,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -1564,7 +1564,7 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Malzahar": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 73,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -1574,12 +1574,12 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Ryze": {
-        "tier": "1",
+        "tier": "3",
         "opggGames": 167,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Vex": {
-        "tier": "1",
+        "tier": "3",
         "opggGames": 85,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -1623,7 +1623,7 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Yone": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 298,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -1641,62 +1641,62 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "TwistedFate": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 263,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Katarina": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 137,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Hwei": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 175,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Lissandra": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 128,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Lux": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 72,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Galio": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 208,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Veigar": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 51,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Vladimir": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 49,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Diana": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 93,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Irelia": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 120,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Ekko": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 76,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Qiyana": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 56,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -1706,27 +1706,27 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Anivia": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 96,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Kassadin": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 64,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Nasus": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 76,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Akshan": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 40,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Aurora": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 70,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -1736,12 +1736,12 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Talon": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 63,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Taliyah": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 54,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -1749,7 +1749,7 @@
         "tier": "2"
       },
       "Jayce": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 39,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -1772,7 +1772,7 @@
         "tier": "2"
       },
       "Xerath": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 206,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -1816,7 +1816,7 @@
     },
     "Anivia": {
       "Yasuo": {
-        "tier": "1",
+        "tier": "3",
         "opggGames": 32,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -1870,17 +1870,17 @@
         "tier": "1"
       },
       "Viktor": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 96,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Syndra": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 68,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Zed": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 37,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -1890,12 +1890,12 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Locke": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 66,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Sylas": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 55,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -1915,7 +1915,7 @@
         "tier": "2"
       },
       "Orianna": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 38,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -1962,7 +1962,7 @@
         "tier": "2"
       },
       "Ahri": {
-        "tier": "3",
+        "tier": "1",
         "opggGames": 54,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -1980,7 +1980,7 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Hwei": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 42,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -2028,7 +2028,7 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Yone": {
-        "tier": "1",
+        "tier": "3",
         "opggGames": 58,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -2083,12 +2083,12 @@
         "tier": "1"
       },
       "Ahri": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 58,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Zed": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 56,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -2098,7 +2098,7 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Locke": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 54,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -2111,12 +2111,12 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Lissandra": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 31,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Akali": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 45,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -2130,7 +2130,7 @@
         "tier": "2"
       },
       "Galio": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 41,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -2156,12 +2156,12 @@
         "tier": "2"
       },
       "Yasuo": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 44,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Katarina": {
-        "tier": "3",
+        "tier": "1",
         "opggGames": 51,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -2235,7 +2235,7 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Lissandra": {
-        "tier": "1",
+        "tier": "3",
         "opggGames": 43,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -2245,7 +2245,7 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Akali": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 56,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -2263,12 +2263,12 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Orianna": {
-        "tier": "1",
+        "tier": "3",
         "opggGames": 53,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Anivia": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 42,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -2276,12 +2276,12 @@
         "tier": "1"
       },
       "Nasus": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 38,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Irelia": {
-        "tier": "1",
+        "tier": "3",
         "opggGames": 46,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -2319,42 +2319,42 @@
         "tier": "1"
       },
       "Viktor": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 175,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Syndra": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 98,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Ahri": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 93,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Yasuo": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 51,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Zed": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 68,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Xerath": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 67,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Locke": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 75,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Katarina": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 49,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -2525,7 +2525,7 @@
         "tier": "3"
       },
       "Yone": {
-        "tier": "3",
+        "tier": "1",
         "opggGames": 97,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -2542,7 +2542,7 @@
         "tier": "3"
       },
       "Nasus": {
-        "tier": "3",
+        "tier": "1",
         "opggGames": 57,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -2625,22 +2625,22 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Yasuo": {
-        "tier": "1",
+        "tier": "3",
         "opggGames": 38,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Sion": {
-        "tier": "1",
+        "tier": "3",
         "opggGames": 49,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Akali": {
-        "tier": "1",
+        "tier": "3",
         "opggGames": 51,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Gragas": {
-        "tier": "1",
+        "tier": "2",
         "opggGames": 50,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -2665,12 +2665,12 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Jayce": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 179,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Renekton": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 106,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -2680,7 +2680,7 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Gangplank": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 170,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -2690,12 +2690,12 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Sett": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 44,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Garen": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 48,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -2705,27 +2705,27 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Mordekaiser": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 51,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Fiora": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 87,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Camille": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 78,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "KSante": {
-        "tier": "2",
+        "tier": "3",
         "opggGames": 92,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Teemo": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 55,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -2735,7 +2735,7 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Gnar": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 52,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -2774,12 +2774,12 @@
         "tier": "2"
       },
       "Vayne": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 47,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Rumble": {
-        "tier": "2",
+        "tier": "1",
         "opggGames": 62,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -2812,7 +2812,7 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Ambessa": {
-        "tier": "3",
+        "tier": "1",
         "opggGames": 67,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -2825,12 +2825,12 @@
         "tier": "3"
       },
       "Yorick": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 49,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Singed": {
-        "tier": "3",
+        "tier": "2",
         "opggGames": 38,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
@@ -2985,8 +2985,8 @@
     },
     "Akali": {
       "Yone": {
-        "tier": "2",
-        "opggGames": 175,
+        "tier": "1",
+        "opggGames": 217,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Jax": {
@@ -3005,8 +3005,8 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Nasus": {
-        "tier": "2",
-        "opggGames": 58,
+        "tier": "3",
+        "opggGames": 48,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Aatrox": {
@@ -3015,8 +3015,8 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Irelia": {
-        "tier": "1",
-        "opggGames": 50,
+        "tier": "2",
+        "opggGames": 70,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Renekton": {
@@ -3030,8 +3030,8 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Pantheon": {
-        "tier": "1",
-        "opggGames": 41,
+        "tier": "3",
+        "opggGames": 30,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Ambessa": {
@@ -3278,7 +3278,7 @@
       },
       "Pantheon": {
         "tier": "1",
-        "opggGames": 42,
+        "opggGames": 52,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Mordekaiser": {
@@ -4272,8 +4272,8 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Yone": {
-        "tier": "3",
-        "opggGames": 169,
+        "tier": "1",
+        "opggGames": 53,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Gangplank": {
@@ -4337,8 +4337,8 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Akali": {
-        "tier": "3",
-        "opggGames": 49,
+        "tier": "2",
+        "opggGames": 70,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Zaahen": {
@@ -4357,8 +4357,8 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Yasuo": {
-        "tier": "3",
-        "opggGames": 45,
+        "tier": "1",
+        "opggGames": 55,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Kennen": {
@@ -4692,7 +4692,7 @@
       },
       "Yone": {
         "tier": "2",
-        "opggGames": 259,
+        "opggGames": 33,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Irelia": {
@@ -4928,8 +4928,8 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Yone": {
-        "tier": "2",
-        "opggGames": 93,
+        "tier": "1",
+        "opggGames": 142,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Jax": {
@@ -4948,8 +4948,8 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Nasus": {
-        "tier": "3",
-        "opggGames": 53,
+        "tier": "1",
+        "opggGames": 56,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "KSante": {
@@ -4958,8 +4958,8 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Irelia": {
-        "tier": "1",
-        "opggGames": 44,
+        "tier": "3",
+        "opggGames": 55,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Malphite": {
@@ -5206,7 +5206,7 @@
       },
       "Jayce": {
         "tier": "2",
-        "opggGames": 264,
+        "opggGames": 33,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Aatrox": {
@@ -5215,8 +5215,8 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Nasus": {
-        "tier": "2",
-        "opggGames": 225,
+        "tier": "1",
+        "opggGames": 61,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "KSante": {
@@ -5230,13 +5230,13 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Akali": {
-        "tier": "1",
-        "opggGames": 169,
+        "tier": "3",
+        "opggGames": 217,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Irelia": {
-        "tier": "1",
-        "opggGames": 167,
+        "tier": "3",
+        "opggGames": 53,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Malphite": {
@@ -5271,7 +5271,7 @@
       },
       "Pantheon": {
         "tier": "3",
-        "opggGames": 101,
+        "opggGames": 33,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Sion": {
@@ -5280,8 +5280,8 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Yasuo": {
-        "tier": "2",
-        "opggGames": 95,
+        "tier": "3",
+        "opggGames": 142,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Garen": {
@@ -5365,8 +5365,8 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Ryze": {
-        "tier": "2",
-        "opggGames": 48,
+        "tier": "1",
+        "opggGames": 89,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Illaoi": {
@@ -5415,8 +5415,8 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Vladimir": {
-        "tier": "1",
-        "opggGames": 30,
+        "tier": "3",
+        "opggGames": 37,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Viktor": {
@@ -11170,7 +11170,7 @@
     "Pantheon": {
       "Yone": {
         "tier": "1",
-        "opggGames": 98,
+        "opggGames": 33,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Jayce": {
@@ -11215,7 +11215,7 @@
       },
       "Camille": {
         "tier": "3",
-        "opggGames": 43,
+        "opggGames": 52,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Ambessa": {
@@ -11224,8 +11224,8 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Akali": {
-        "tier": "3",
-        "opggGames": 41,
+        "tier": "1",
+        "opggGames": 30,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Irelia": {
@@ -14762,8 +14762,8 @@
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Sylas": {
-        "tier": "1",
-        "opggGames": 39,
+        "tier": "3",
+        "opggGames": 31,
         "opggUpdated": "2026-09-12T01:04:21.701Z"
       },
       "Locke": {
