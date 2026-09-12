@@ -447,17 +447,17 @@ async function startOpggSync() {
         // Build list of tasks {champId, role}
         let tasks = [];
         if (role === 'all') {
-            // For ALL, get every champion in pool and their registered roles
-            for (const [champId, roles] of Object.entries(state.userData.pool)) {
-                roles.forEach(r => {
-                    tasks.push({ champId, role: r });
+            // For ALL, get every champion in every role from state.userData.roles
+            for (const [r, champIds] of Object.entries(state.userData.roles)) {
+                champIds.forEach(champId => {
+                    tasks.push({ champId: champId, role: r });
                 });
             }
         } else {
             // For specific role
-            const roleChamps = getChampionsForCurrentRole();
-            roleChamps.forEach(c => {
-                tasks.push({ champId: c.id, role: role });
+            const roleIds = state.userData.roles[role] || [];
+            roleIds.forEach(champId => {
+                tasks.push({ champId: champId, role: role });
             });
         }
         
