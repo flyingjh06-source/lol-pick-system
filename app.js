@@ -438,80 +438,106 @@ const OPGG_SERVER = (window.location.protocol === 'file:' || window.location.hos
     : window.location.origin;
 
 async function startOpggSync() {
-    const role = state.currentRole;
+    const btn = document.getElementById('opgg-sync-btn');
+    const originalText = btn.textContent;
     
-    // Build list of tasks {champId, role}
-    let tasks = [];
-    if (role === 'all') {
-        // For ALL, get every champion in pool and their registered roles
-        for (const [champId, roles] of Object.entries(state.userData.pool)) {
-            roles.forEach(r => {
-                tasks.push({ champId, role: r });
+    try {
+        const role = state.currentRole;
+        
+        // Build list of tasks {champId, role}
+        let tasks = [];
+        if (role === 'all') {
+            // For ALL, get every champion in pool and their registered roles
+            for (const [champId, roles] of Object.entries(state.userData.pool)) {
+                roles.forEach(r => {
+                    tasks.push({ champId, role: r });
+                });
+            }
+        } else {
+            // For specific role
+            const roleChamps = getChampionsForCurrentRole();
+            roleChamps.forEach(c => {
+                tasks.push({ champId: c.id, role: role });
             });
         }
-    } else {
-        // For specific role
-        const roleChamps = getChampionsForCurrentRole();
-        roleChamps.forEach(c => {
-            tasks.push({ champId: c.id, role: role });
-        });
-    }
-    
-    if (tasks.length === 0) {
-        alert(role === 'all' ? '등록된 챔피언이 없습니다.' : `${role.toUpperCase()} 라인에 등록된 챔피언이 없습니다.`);
-        return;
-    }
-    
-    // Check if server is running
-    try {
-        const testRes = await fetch(OPGG_SERVER, { mode: 'cors' });
-    } catch(e) {
-        alert('⚠️ OP.GG 스크래핑 서버가 응답하지 않습니다.');
-        return;
-    }
-    
-    // Try to get cached data first
-    try {
-        const cacheRes = await fetch(`${OPGG_SERVER}/api/cache`);
-        if (cacheRes.ok) {
-            const cacheData = await cacheRes.json();
-            const roleMap = { top: 'top', jungle: 'jungle', mid: 'mid', adc: 'adc', support: 'support' };
-            let updatedCount = 0;
-            
-            for (const task of tasks) {
-                const opggRole = roleMap[task.role];
-                const champId = task.champId;
+        
+        if (tasks.length === 0) {
+            alert(role === 'all' ? '등록된 챔피언이 없습니다.' : `${role.toUpperCase()} 라인에 등록된 챔피언이 없습니다.`);
+            return;
+        }
+        
+        btn.textContent = '서버 연결 중... (최대 1분 소요)';
+        btn.style.opacity = '0.7';
+        btn.disabled = true;
+        
+        // Check if server is running
+        try {
+            const testRes = await fetch(OPGG_SERVER, { mode: 'cors' });
+        } catch(e) {
+            alert('⚠️ OP.GG 스크래핑 서버가 응답하지 않습니다.');
+            btn.textContent = originalText;
+            btn.style.opacity = '1';
+            btn.disabled = false;
+            return;
+        }
+        
+        btn.textContent = '캐시 확인 중...';
+        
+        // Try to get cached data first
+        try {
+            const cacheRes = await fetch(`${OPGG_SERVER}/api/cache`);
+            if (cacheRes.ok) {
+                const cacheData = await cacheRes.json();
+                const roleMap = { top: 'top', jungle: 'jungle', mid: 'mid', adc: 'adc', support: 'support' };
+                let updatedCount = 0;
                 
-                if (cacheData.matchups[champId] && cacheData.matchups[champId][opggRole]) {
-                    if (!state.userData.matchups[champId]) state.userData.matchups[champId] = {};
+                for (const task of tasks) {
+                    const opggRole = roleMap[task.role];
+                    const champId = task.champId;
                     
-                    const roleData = cacheData.matchups[champId][opggRole];
-                    for (const [oppId, info] of Object.entries(roleData)) {
-                        state.userData.matchups[champId][oppId] = {
-                            ...state.userData.matchups[champId][oppId],
-                            tier: info.tier,
-                            opggWinRate: info.winRate,
-                            opggGames: info.games,
-                            opggUpdated: cacheData.updatedAt
-                        };
+                    if (cacheData.matchups[champId] && cacheData.matchups[champId][opggRole]) {
+                        if (!state.userData.matchups[champId]) state.userData.matchups[champId] = {};
+                        
+                        const roleData = cacheData.matchups[champId][opggRole];
+                        for (const [oppId, info] of Object.entries(roleData)) {
+                            state.userData.matchups[champId][oppId] = {
+                                ...state.userData.matchups[champId][oppId],
+                                tier: info.tier,
+                                opggWinRate: info.winRate,
+                                opggGames: info.games,
+                                opggUpdated: cacheData.updatedAt
+                            };
+                        }
+                        updatedCount++;
                     }
-                    updatedCount++;
+                }
+                
+                if (updatedCount > 0) {
+                    saveUserData();
+                    alert(`✅ 서버에 캐시된 최신 OP.GG 데이터를 즉시 적용했습니다.\n(적용된 매치업 챔피언 수: ${updatedCount})`);
+                    if (els.mainView.classList.contains('active')) renderMainView();
+                    btn.textContent = originalText;
+                    btn.style.opacity = '1';
+                    btn.disabled = false;
+                    return;
                 }
             }
-            
-            if (updatedCount > 0) {
-                saveUserData();
-                alert(`✅ 서버에 캐시된 최신 OP.GG 데이터를 즉시 적용했습니다.\n(적용된 매치업 챔피언 수: ${updatedCount})`);
-                if (els.mainView.classList.contains('active')) renderMainView();
-                return;
-            }
+        } catch(e) {
+            console.log("Cache fetch failed or no data for this role. Falling back to live scrape.");
         }
-    } catch(e) {
-        console.log("Cache fetch failed or no data for this role. Falling back to live scrape.");
+        
+        btn.textContent = originalText;
+        btn.style.opacity = '1';
+        btn.disabled = false;
+        
+        // Fallback: Create and show sync modal for live scraping
+        showSyncModal(tasks, role);
+    } catch (err) {
+        btn.textContent = originalText;
+        btn.style.opacity = '1';
+        btn.disabled = false;
+        alert('startOpggSync 에러 발생: ' + err.message + '\n' + err.stack);
     }
-    
-    // Fallback: Create and show sync modal for live scraping
-    showSyncModal(tasks, role);
 }
 
 function showSyncModal(tasks, modeRole) {
