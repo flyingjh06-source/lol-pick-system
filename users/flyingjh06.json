@@ -7177,7 +7177,8 @@
         "tier": "2"
       },
       "Fizz": {
-        "tier": "1"
+        "tier": "1",
+        "comment": "여진들고 정령의형상 탱피들"
       },
       "Viktor": {
         "tier": "3"
