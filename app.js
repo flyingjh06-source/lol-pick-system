@@ -89,6 +89,10 @@ const els = {
     authGuestBtn: document.getElementById('auth-guest-btn'),
 };
 
+const CLOUD_SERVER = (window.location.protocol === 'file:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    ? 'https://lol-pick-system-v2.onrender.com'
+    : window.location.origin;
+
 // Initialize
 async function init() {
     const savedUser = localStorage.getItem('lol_pick_system_current_user') || 'Guest';
@@ -98,7 +102,7 @@ async function init() {
         const loginBtn = document.getElementById('login-btn');
         if (loginBtn) loginBtn.textContent = '동기화 중...';
         try {
-            const res = await fetch('https://lol-pick-system-v2.onrender.com/api/user/' + savedUser);
+            const res = await fetch(`${CLOUD_SERVER}/api/user/` + savedUser);
             if (res.ok) {
                 const cloudData = await res.json();
                 if (cloudData && cloudData.roles) {
@@ -417,7 +421,7 @@ function saveUserData() {
     if (state.currentUser !== 'Guest') {
         clearTimeout(cloudSaveTimeout);
         cloudSaveTimeout = setTimeout(() => {
-            fetch('https://lol-pick-system-v2.onrender.com/api/user/' + state.currentUser, {
+            fetch(`${CLOUD_SERVER}/api/user/` + state.currentUser, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(state.userData)
@@ -868,7 +872,7 @@ function setupEventListeners() {
         if (username !== 'Guest') {
             els.loginBtn.textContent = '동기화 중...';
             try {
-                const res = await fetch('https://lol-pick-system-v2.onrender.com/api/user/' + username);
+                const res = await fetch(`${CLOUD_SERVER}/api/user/` + username);
                 if (res.ok) {
                     const cloudData = await res.json();
                     if (cloudData && cloudData.roles) {
