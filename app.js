@@ -98,7 +98,7 @@ async function init() {
         const loginBtn = document.getElementById('login-btn');
         if (loginBtn) loginBtn.textContent = '동기화 중...';
         try {
-            const res = await fetch('https://lol-pick-system.onrender.com/api/user/' + savedUser);
+            const res = await fetch('https://lol-pick-system-v2.onrender.com/api/user/' + savedUser);
             if (res.ok) {
                 const cloudData = await res.json();
                 if (cloudData && cloudData.roles) {
@@ -417,7 +417,7 @@ function saveUserData() {
     if (state.currentUser !== 'Guest') {
         clearTimeout(cloudSaveTimeout);
         cloudSaveTimeout = setTimeout(() => {
-            fetch('https://lol-pick-system.onrender.com/api/user/' + state.currentUser, {
+            fetch('https://lol-pick-system-v2.onrender.com/api/user/' + state.currentUser, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(state.userData)
@@ -448,7 +448,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 deferredPrompt = null;
             } else {
                 // If PWA install is not available, download a .url shortcut file
-                const urlContent = `[InternetShortcut]\nURL=https://lol-pick-system.onrender.com\n`;
+                const urlContent = `[InternetShortcut]\nURL=https://lol-pick-system-v2.onrender.com\n`;
                 const blob = new Blob([urlContent], { type: "text/plain" });
                 const a = document.createElement('a');
                 a.href = URL.createObjectURL(blob);
@@ -868,7 +868,7 @@ function setupEventListeners() {
         if (username !== 'Guest') {
             els.loginBtn.textContent = '동기화 중...';
             try {
-                const res = await fetch('https://lol-pick-system.onrender.com/api/user/' + username);
+                const res = await fetch('https://lol-pick-system-v2.onrender.com/api/user/' + username);
                 if (res.ok) {
                     const cloudData = await res.json();
                     if (cloudData && cloudData.roles) {
