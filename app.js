@@ -830,7 +830,7 @@ function setupEventListeners() {
         els.authModal.classList.add('hidden');
     });
     
-    els.authSubmitBtn.addEventListener('click', () => {
+    els.authSubmitBtn.addEventListener('click', async () => {
         const username = els.authUsernameInput.value.trim();
         const password = els.authPasswordInput.value.trim();
         
@@ -849,10 +849,21 @@ function setupEventListeners() {
             users[username] = password;
             localStorage.setItem('lol_pick_system_users', JSON.stringify(users));
             alert('회원가입이 완료되었습니다! 로그인되었습니다.');
-            loginUser(username);
+            await loginUser(username);
             els.authModal.classList.add('hidden');
         } else {
             if (!users[username]) {
+                // Check if user exists in cloud storage
+                try {
+                    const checkRes = await fetch(`${CLOUD_SERVER}/api/user/` + username);
+                    if (checkRes.ok) {
+                        users[username] = password;
+                        localStorage.setItem('lol_pick_system_users', JSON.stringify(users));
+                        await loginUser(username);
+                        els.authModal.classList.add('hidden');
+                        return;
+                    }
+                } catch(e) {}
                 els.authErrorMsg.textContent = '존재하지 않는 아이디입니다.';
                 return;
             }
@@ -860,7 +871,7 @@ function setupEventListeners() {
                 els.authErrorMsg.textContent = '비밀번호가 일치하지 않습니다.';
                 return;
             }
-            loginUser(username);
+            await loginUser(username);
             els.authModal.classList.add('hidden');
         }
     });
