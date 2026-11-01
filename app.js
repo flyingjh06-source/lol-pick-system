@@ -150,267 +150,240 @@ function loadUserData() {
     }
 
     // 미리 분류된 기본 라인별 챔피언 데이터 주입 (데이터가 아예 비어있을 경우)
+    const defaultRoles = {
+        top: ['Aatrox', 'Akali', 'Ambessa', 'Anivia', 'Camille', 'Chogath', 'Darius', 'DrMundo', 'Fiora', 'Gangplank', 'Garen', 'Gnar', 'Gragas', 'Gwen', 'Heimerdinger', 'Illaoi', 'Irelia', 'Jax', 'Jayce', 'KSante', 'Kayle', 'Kennen', 'Kled', 'Malphite', 'Maokai', 'MonkeyKing', 'Mordekaiser', 'Nasus', 'Olaf', 'Ornn', 'Pantheon', 'Poppy', 'Quinn', 'Renekton', 'Rengar', 'Riven', 'Rumble', 'Ryze', 'Sett', 'Shen', 'Singed', 'Sion', 'Sylas', 'TahmKench', 'Teemo', 'Trundle', 'Tryndamere', 'Urgot', 'Varus', 'Vayne', 'Vladimir', 'Volibear', 'Warwick', 'Yasuo', 'Yone', 'Yorick', 'Zaahen', 'Zac'],
+        jungle: ['Aatrox', 'Ambessa', 'Amumu', 'Belveth', 'Brand', 'Briar', 'Chogath', 'Diana', 'Ekko', 'Elise', 'Evelynn', 'Fiddlesticks', 'Fizz', 'Gragas', 'Graves', 'Hecarim', 'Ivern', 'JarvanIV', 'Jayce', 'Karthus', 'Kayn', 'Khazix', 'Kindred', 'LeeSin', 'Lillia', 'Locke', 'MasterYi', 'MonkeyKing', 'Naafiri', 'Nidalee', 'Nocturne', 'Nunu', 'Pantheon', 'Poppy', 'Qiyana', 'Quinn', 'Rammus', 'RekSai', 'Rengar', 'Sejuani', 'Shaco', 'Shyvana', 'Skarner', 'Sylas', 'Taliyah', 'Talon', 'Trundle', 'Udyr', 'Vi', 'Viego', 'Volibear', 'Warwick', 'XinZhao', 'Zac', 'Zed', 'Zyra'],
+        mid: ['Ahri', 'Akali', 'Akshan', 'Anivia', 'Annie', 'AurelionSol', 'Aurora', 'Azir', 'Brand', 'Cassiopeia', 'Corki', 'Diana', 'Ekko', 'Fizz', 'Galio', 'Gangplank', 'Gragas', 'Heimerdinger', 'Hwei', 'Irelia', 'Jayce', 'Kassadin', 'Katarina', 'Leblanc', 'Lissandra', 'Locke', 'Lucian', 'Lux', 'Malzahar', 'Mel', 'Naafiri', 'Nasus', 'Neeko', 'Nunu', 'Orianna', 'Pantheon', 'Qiyana', 'Ryze', 'Smolder', 'Swain', 'Sylas', 'Syndra', 'Taliyah', 'Talon', 'Tristana', 'TwistedFate', 'Veigar', 'Velkoz', 'Vex', 'Viktor', 'Vladimir', 'Xerath', 'Yasuo', 'Yone', 'Zed', 'Ziggs', 'Zoe'],
+        adc: ['Aphelios', 'Ashe', 'Caitlyn', 'Corki', 'Draven', 'Ezreal', 'Jhin', 'Jinx', 'Kaisa', 'Kalista', 'KogMaw', 'Lucian', 'MissFortune', 'Nilah', 'Samira', 'Sivir', 'Smolder', 'Tristana', 'Twitch', 'Varus', 'Vayne', 'Viktor', 'Xayah', 'Xerath', 'Yasuo', 'Yunara', 'Zeri', 'Ziggs'],
+        support: ['Alistar', 'Amumu', 'Ashe', 'Bard', 'Blitzcrank', 'Brand', 'Braum', 'Camille', 'Elise', 'Fiddlesticks', 'Galio', 'Heimerdinger', 'Hwei', 'Janna', 'Karma', 'Leblanc', 'Leona', 'Lulu', 'Lux', 'Maokai', 'Mel', 'Milio', 'Morgana', 'Nami', 'Nautilus', 'Neeko', 'Pantheon', 'Poppy', 'Pyke', 'Rakan', 'Rell', 'Renata', 'Senna', 'Seraphine', 'Shaco', 'Shen', 'Sona', 'Soraka', 'Swain', 'Sylas', 'TahmKench', 'Taric', 'Thresh', 'Velkoz', 'Xerath', 'Yuumi', 'Zac', 'Zilean', 'Zoe', 'Zyra']
+    };
+
+    const idFixMap = {
+        'LeBlanc': 'Leblanc',
+        'ChoGath': 'Chogath',
+        'Wukong': 'MonkeyKing',
+        'KhaZix': 'Khazix'
+    };
+
+    let needsSave = false;
     const isRolesEmpty = Object.values(state.userData.roles).every(arr => arr.length === 0);
     if (isRolesEmpty) {
-        state.userData.roles = {
-            top: ['Aatrox', 'Akali', 'Camille', 'ChoGath', 'Darius', 'DrMundo', 'Fiora', 'Gangplank', 'Garen', 'Gnar', 'Gragas', 'Gwen', 'Illaoi', 'Irelia', 'Jax', 'Jayce', 'KSante', 'Kayle', 'Kennen', 'Kled', 'Malphite', 'Maokai', 'Mordekaiser', 'Nasus', 'Olaf', 'Ornn', 'Pantheon', 'Poppy', 'Quinn', 'Renekton', 'Rengar', 'Riven', 'Rumble', 'Sett', 'Shen', 'Singed', 'Sion', 'Sylas', 'TahmKench', 'Teemo', 'Trundle', 'Tryndamere', 'Urgot', 'Vayne', 'Volibear', 'Warwick', 'Wukong', 'Yasuo', 'Yone', 'Yorick', 'Zac'],
-            jungle: ['Amumu', 'Belveth', 'Briar', 'Diana', 'Ekko', 'Elise', 'Evelynn', 'Fiddlesticks', 'Gragas', 'Graves', 'Hecarim', 'Ivern', 'JarvanIV', 'Karthus', 'Kayn', 'KhaZix', 'Kindred', 'LeeSin', 'Lillia', 'MasterYi', 'Nidalee', 'Nocturne', 'Nunu', 'Pantheon', 'Poppy', 'Rammus', 'RekSai', 'Rengar', 'Sejuani', 'Shaco', 'Shyvana', 'Skarner', 'Sylas', 'Taliyah', 'Talon', 'Trundle', 'Udyr', 'Vi', 'Viego', 'Volibear', 'Warwick', 'Wukong', 'XinZhao', 'Zac', 'Zed'],
-            mid: ['Ahri', 'Akali', 'Akshan', 'Anivia', 'Annie', 'AurelionSol', 'Azir', 'Cassiopeia', 'Corki', 'Diana', 'Ekko', 'Fizz', 'Galio', 'Gangplank', 'Gragas', 'Heimerdinger', 'Hwei', 'Irelia', 'Jayce', 'Kassadin', 'Katarina', 'LeBlanc', 'Lissandra', 'Lucian', 'Lux', 'Malzahar', 'Naafiri', 'Neeko', 'Orianna', 'Pantheon', 'Qiyana', 'Ryze', 'Smolder', 'Sylas', 'Syndra', 'Taliyah', 'Talon', 'Tristana', 'TwistedFate', 'Veigar', 'Velkoz', 'Vex', 'Viktor', 'Vladimir', 'Xerath', 'Yasuo', 'Yone', 'Zed', 'Ziggs', 'Zoe'],
-            adc: ['Aphelios', 'Ashe', 'Caitlyn', 'Draven', 'Ezreal', 'Jhin', 'Jinx', 'Kaisa', 'Kalista', 'KogMaw', 'Lucian', 'MissFortune', 'Nilah', 'Samira', 'Sivir', 'Smolder', 'Tristana', 'Twitch', 'Varus', 'Vayne', 'Xayah', 'Yasuo', 'Zeri', 'Ziggs'],
-            support: ['Alistar', 'Ashe', 'Bard', 'Blitzcrank', 'Braum', 'Camille', 'Galio', 'Heimerdinger', 'Hwei', 'Janna', 'Karma', 'Leona', 'Lulu', 'Lux', 'Maokai', 'Milio', 'Morgana', 'Nami', 'Nautilus', 'Neeko', 'Pantheon', 'Pyke', 'Rakan', 'Rell', 'Renata', 'Senna', 'Seraphine', 'Shaco', 'Sona', 'Soraka', 'Swain', 'TahmKench', 'Taric', 'Thresh', 'Velkoz', 'Xerath', 'Yuumi', 'Zac', 'Zilean', 'Zyra']
-        };
-        saveUserData(); // 기본값 자동 저장
-    }
-
-    // Inject Yorick's match up tiers from user provided OP.GG screenshots
-    state.userData.matchups['Yorick'] = state.userData.matchups['Yorick'] || {};
-    const yorickData = {
-        "Yone": {"tier": "3"}, "Nasus": {"tier": "3"}, "Jayce": {"tier": "1"}, "Jax": {"tier": "3"}, 
-        "Gangplank": {"tier": "2"}, "Darius": {"tier": "1"}, "Renekton": {"tier": "2"}, "Garen": {"tier": "3"}, 
-        "Sett": {"tier": "3"}, "Mordekaiser": {"tier": "1"}, "Irelia": {"tier": "3"}, "Aatrox": {"tier": "1"}, 
-        "Chogath": {"tier": "1"}, "Malphite": {"tier": "2"}, "Teemo": {"tier": "3"}, "Shen": {"tier": "3"}, 
-        "Gnar": {"tier": "2"}, "KSante": {"tier": "1"}, "Sion": {"tier": "3"}, "Gwen": {"tier": "3"}, 
-        "Camille": {"tier": "3"}, "Ambessa": {"tier": "2"}, "Yasuo": {"tier": "3"}, "Singed": {"tier": "3"}, 
-        "DrMundo": {"tier": "1"}, "Fiora": {"tier": "3"}, "Tryndamere": {"tier": "3"}, "Ornn": {"tier": "3"}, 
-        "Volibear": {"tier": "2"}, "Urgot": {"tier": "2"}, "Illaoi": {"tier": "2"}, "Zaahen": {"tier": "1"}, 
-        "Pantheon": {"tier": "1"}, "Olaf": {"tier": "1"}, "Kennen": {"tier": "2"}, "Warwick": {"tier": "3"}, 
-        "Trundle": {"tier": "3"}, "Gragas": {"tier": "1"}, "Rumble": {"tier": "1"}, "Kayle": {"tier": "3"}, 
-        "Akali": {"tier": "2"}, "Riven": {"tier": "2"}, "Heimerdinger": {"tier": "1"}, "Kled": {"tier": "2"}, 
-        "TahmKench": {"tier": "1"}, "Vayne": {"tier": "1"}, "Vladimir": {"tier": "1"}, "MonkeyKing": {"tier": "3"}, 
-        "Poppy": {"tier": "2"}, "Quinn": {"tier": "3"}, "Varus": {"tier": "1"}, "Anivia": {"tier": "3"}, 
-        "Ryze": {"tier": "1"}, "Zac": {"tier": "3"}, "Swain": {"tier": "1"}, "Cassiopeia": {"tier": "2"}, 
-        "Udyr": {"tier": "3"}, "MasterYi": {"tier": "1"}
-    };
-    for (const champ in yorickData) {
-        state.userData.matchups['Yorick'][champ] = { ...state.userData.matchups['Yorick'][champ], ...yorickData[champ] };
-    }
-    
-    // Ensure Zaahen is in top pool
-    if (state.userData.roles.top && !state.userData.roles.top.includes('Zaahen')) {
-        state.userData.roles.top.push('Zaahen');
-        state.userData.roles.top.sort();
-    }
-    
-    // Inject Zac's match up tiers from user provided OP.GG screenshots
-    state.userData.matchups['Zac'] = state.userData.matchups['Zac'] || {};
-    const zacData = {
-        "Yone": {"tier": "1"}, "Nasus": {"tier": "2"}, "Darius": {"tier": "2"}, "Malphite": {"tier": "2"},
-        "Garen": {"tier": "3"}, "Mordekaiser": {"tier": "3"}, "Renekton": {"tier": "1"}, "Gangplank": {"tier": "2"},
-        "Ambessa": {"tier": "1"}, "Aatrox": {"tier": "2"}, "Sett": {"tier": "1"}, "Jax": {"tier": "2"},
-        "Irelia": {"tier": "1"}, "Jayce": {"tier": "1"}, "KSante": {"tier": "2"}, "Fiora": {"tier": "1"},
-        "Camille": {"tier": "3"}, "Zaahen": {"tier": "2"}, "Olaf": {"tier": "3"}, "Teemo": {"tier": "2"},
-        "Sion": {"tier": "1"}, "DrMundo": {"tier": "1"}, "Gwen": {"tier": "2"}, "Ornn": {"tier": "3"},
-        "Shen": {"tier": "1"}, "Gnar": {"tier": "1"}, "Singed": {"tier": "3"}, "Pantheon": {"tier": "2"},
-        "Yorick": {"tier": "2"}, "Chogath": {"tier": "2"}, "Tryndamere": {"tier": "1"}, "Riven": {"tier": "1"},
-        "Volibear": {"tier": "1"}, "Yasuo": {"tier": "3"}, "Kled": {"tier": "3"}, "Gragas": {"tier": "3"},
-        "Illaoi": {"tier": "2"}, "Akali": {"tier": "1"}, "Rumble": {"tier": "1"}, "Urgot": {"tier": "1"},
-        "Kennen": {"tier": "2"}, "Vayne": {"tier": "1"}, "Anivia": {"tier": "3"}, "Kayle": {"tier": "1"},
-        "Trundle": {"tier": "1"}, "Poppy": {"tier": "2"}, "TahmKench": {"tier": "3"}
-    };
-    for (const champ in zacData) {
-        state.userData.matchups['Zac'][champ] = { ...state.userData.matchups['Zac'][champ], ...zacData[champ] };
-    }
-    
-    // Inject Quinn's match up tiers from user provided OP.GG screenshots
-    state.userData.matchups['Quinn'] = state.userData.matchups['Quinn'] || {};
-    const quinnData = {
-        "Gangplank": {"tier": "1"}, "Nasus": {"tier": "2"}, "Darius": {"tier": "1"}, "Jayce": {"tier": "1"},
-        "Garen": {"tier": "2"}, "Renekton": {"tier": "3"}, "Yone": {"tier": "1"}, "Malphite": {"tier": "3"},
-        "Jax": {"tier": "1"}, "Teemo": {"tier": "3"}, "Irelia": {"tier": "3"}, "Sett": {"tier": "1"},
-        "Aatrox": {"tier": "2"}, "Fiora": {"tier": "1"}, "Yasuo": {"tier": "2"}, "Ambessa": {"tier": "1"},
-        "Camille": {"tier": "2"}, "Gnar": {"tier": "3"}, "Olaf": {"tier": "3"}, "Mordekaiser": {"tier": "3"},
-        "DrMundo": {"tier": "2"}, "Sion": {"tier": "2"}, "Riven": {"tier": "2"}, "Akali": {"tier": "1"},
-        "Tryndamere": {"tier": "2"}, "Kennen": {"tier": "1"}, "Ornn": {"tier": "3"}, "KSante": {"tier": "1"},
-        "Pantheon": {"tier": "1"}, "Yorick": {"tier": "2"}, "Shen": {"tier": "2"}, "Chogath": {"tier": "1"},
-        "Singed": {"tier": "1"}, "Urgot": {"tier": "2"}, "Zaahen": {"tier": "1"}, "Gragas": {"tier": "1"},
-        "Volibear": {"tier": "1"}, "Kled": {"tier": "3"}, "Vayne": {"tier": "1"}, "Gwen": {"tier": "3"},
-        "Illaoi": {"tier": "1"}, "Vladimir": {"tier": "2"}, "Kayle": {"tier": "1"}, "Rumble": {"tier": "2"},
-        "Trundle": {"tier": "1"}, "TahmKench": {"tier": "3"}, "Warwick": {"tier": "3"}, "Heimerdinger": {"tier": "3"},
-        "Varus": {"tier": "1"}, "Ryze": {"tier": "1"}, "Anivia": {"tier": "1"}
-    };
-    for (const champ in quinnData) {
-        state.userData.matchups['Quinn'][champ] = { ...state.userData.matchups['Quinn'][champ], ...quinnData[champ] };
-    }
-    
-    // Inject Velkoz's match up tiers from user provided OP.GG screenshots
-    state.userData.matchups['Velkoz'] = state.userData.matchups['Velkoz'] || {};
-    const velkozData = {
-        "Viktor": {"tier": "2"}, "Ahri": {"tier": "2"}, "Syndra": {"tier": "2"}, "Zed": {"tier": "2"},
-        "Yasuo": {"tier": "1"}, "Sylas": {"tier": "3"}, "Locke": {"tier": "2"}, "LeBlanc": {"tier": "3"},
-        "Malzahar": {"tier": "2"}, "Hwei": {"tier": "1"}, "Yone": {"tier": "2"}, "Katarina": {"tier": "2"},
-        "Fizz": {"tier": "3"}, "Lissandra": {"tier": "2"}, "Xerath": {"tier": "3"}, "Lux": {"tier": "1"},
-        "TwistedFate": {"tier": "2"}, "Akali": {"tier": "1"}, "Veigar": {"tier": "1"}, "Kassadin": {"tier": "3"},
-        "Galio": {"tier": "1"}, "Vladimir": {"tier": "1"}, "Ryze": {"tier": "1"}, "Qiyana": {"tier": "3"},
-        "Anivia": {"tier": "2"}, "Orianna": {"tier": "2"}, "Ekko": {"tier": "2"}, "Vex": {"tier": "3"},
-        "Zoe": {"tier": "1"}, "Nasus": {"tier": "1"}, "Akshan": {"tier": "2"}, "Aurora": {"tier": "3"},
-        "Diana": {"tier": "2"}, "Irelia": {"tier": "1"}, "AurelionSol": {"tier": "2"}, "Mel": {"tier": "1"},
-        "Annie": {"tier": "2"}, "Talon": {"tier": "3"}, "Azir": {"tier": "1"}, "Cassiopeia": {"tier": "1"},
-        "Taliyah": {"tier": "2"}, "Tristana": {"tier": "1"}, "Naafiri": {"tier": "1"}, "Gwen": {"tier": "3"}
-    };
-    for (const champ in velkozData) {
-        state.userData.matchups['Velkoz'][champ] = { ...state.userData.matchups['Velkoz'][champ], ...velkozData[champ] };
-    }
-    
-    // Ensure new champions are in mid pool if not already
-    ['Locke', 'Mel', 'Aurora', 'Naafiri'].forEach(champ => {
-        if (state.userData.roles.mid && !state.userData.roles.mid.includes(champ)) {
-            state.userData.roles.mid.push(champ);
-            state.userData.roles.mid.sort();
+        state.userData.roles = JSON.parse(JSON.stringify(defaultRoles));
+        needsSave = true;
+    } else {
+        // 기존 저장 데이터의 오타 ID 자동 보정 및 누락 챔피언 보충
+        for (const [role, defaultList] of Object.entries(defaultRoles)) {
+            if (!Array.isArray(state.userData.roles[role])) state.userData.roles[role] = [];
+            const fixedSet = new Set(state.userData.roles[role].map(id => {
+                if (idFixMap[id]) { needsSave = true; return idFixMap[id]; }
+                return id;
+            }));
+            for (const defId of defaultList) {
+                if (!fixedSet.has(defId)) {
+                    fixedSet.add(defId);
+                    needsSave = true;
+                }
+            }
+            state.userData.roles[role] = [...fixedSet].sort();
         }
-    });
-
-    // Inject Vladimir's match up tiers from user provided OP.GG screenshots
-    state.userData.matchups['Vladimir'] = state.userData.matchups['Vladimir'] || {};
-    const vladimirData = {
-        "Yasuo": {"tier": "1"}, "Katarina": {"tier": "1"}, "Yone": {"tier": "1"}, "Veigar": {"tier": "1"},
-        "Orianna": {"tier": "1"}, "Ekko": {"tier": "1"}, "Diana": {"tier": "1"}, "Akshan": {"tier": "1"},
-        "Talon": {"tier": "1"}, "Azir": {"tier": "1"}, "Mel": {"tier": "1"}, "Taliyah": {"tier": "1"},
-        "Naafiri": {"tier": "1"}, "Swain": {"tier": "1"}, "Jayce": {"tier": "1"}, "Gangplank": {"tier": "1"},
-        "Malphite": {"tier": "1"}, "Ziggs": {"tier": "1"}, "Sion": {"tier": "1"}, "Smolder": {"tier": "1"},
-        "Zed": {"tier": "2"}, "Ahri": {"tier": "2"}, "Viktor": {"tier": "2"}, "Locke": {"tier": "2"},
-        "Sylas": {"tier": "2"}, "LeBlanc": {"tier": "2"}, "Fizz": {"tier": "2"}, "Lissandra": {"tier": "2"},
-        "Akali": {"tier": "2"}, "TwistedFate": {"tier": "2"}, "Ryze": {"tier": "2"}, "Lux": {"tier": "2"},
-        "Xerath": {"tier": "2"}, "Kassadin": {"tier": "2"}, "Qiyana": {"tier": "2"}, "Irelia": {"tier": "2"},
-        "Galio": {"tier": "2"}, "Zoe": {"tier": "2"}, "Cassiopeia": {"tier": "2"}, "Anivia": {"tier": "2"},
-        "Vex": {"tier": "2"}, "Aurora": {"tier": "2"}, "Annie": {"tier": "2"}, "Tristana": {"tier": "2"},
-        "Gwen": {"tier": "2"}, "Pantheon": {"tier": "2"}, "Brand": {"tier": "2"}, "Chogath": {"tier": "2"},
-        "Syndra": {"tier": "3"}, "Malzahar": {"tier": "3"}, "Hwei": {"tier": "3"}, "Nasus": {"tier": "3"},
-        "AurelionSol": {"tier": "3"}, "Velkoz": {"tier": "3"}, "Garen": {"tier": "3"}, "Riven": {"tier": "3"}
-    };
-    for (const champ in vladimirData) {
-        state.userData.matchups['Vladimir'][champ] = { ...state.userData.matchups['Vladimir'][champ], ...vladimirData[champ] };
     }
 
-    // Inject Viktor's match up tiers from user provided OP.GG screenshots
-    state.userData.matchups['Viktor'] = state.userData.matchups['Viktor'] || {};
-    const viktorData = {
-        "Yasuo": {"tier": "1"}, "Sylas": {"tier": "1"}, "Malzahar": {"tier": "1"}, "Orianna": {"tier": "1"},
-        "Ryze": {"tier": "1"}, "Vex": {"tier": "1"}, "Cassiopeia": {"tier": "1"}, "Mel": {"tier": "1"},
-        "Annie": {"tier": "1"}, "Tristana": {"tier": "1"}, "Naafiri": {"tier": "1"}, "Sion": {"tier": "1"},
-        "Smolder": {"tier": "1"}, "Syndra": {"tier": "2"}, "Ahri": {"tier": "2"}, "Yone": {"tier": "2"},
-        "Zed": {"tier": "2"}, "LeBlanc": {"tier": "2"}, "Locke": {"tier": "2"}, "TwistedFate": {"tier": "2"},
-        "Katarina": {"tier": "2"}, "Hwei": {"tier": "2"}, "Lissandra": {"tier": "2"}, "Lux": {"tier": "2"},
-        "Galio": {"tier": "2"}, "Veigar": {"tier": "2"}, "Vladimir": {"tier": "2"}, "Diana": {"tier": "2"},
-        "Irelia": {"tier": "2"}, "Ekko": {"tier": "2"}, "Qiyana": {"tier": "2"}, "Zoe": {"tier": "2"},
-        "Anivia": {"tier": "2"}, "Kassadin": {"tier": "2"}, "Nasus": {"tier": "2"}, "Akshan": {"tier": "2"},
-        "Aurora": {"tier": "2"}, "Azir": {"tier": "2"}, "Talon": {"tier": "2"}, "Taliyah": {"tier": "2"},
-        "Velkoz": {"tier": "2"}, "Jayce": {"tier": "2"}, "Ziggs": {"tier": "2"}, "Brand": {"tier": "2"},
-        "Chogath": {"tier": "2"}, "Pantheon": {"tier": "2"}, "Malphite": {"tier": "2"}, "Gangplank": {"tier": "2"},
-        "Xerath": {"tier": "3"}, "Akali": {"tier": "3"}, "Fizz": {"tier": "3"}, "AurelionSol": {"tier": "3"},
-        "Gwen": {"tier": "3"}, "Swain": {"tier": "3"}, "Garen": {"tier": "3"}, "Riven": {"tier": "3"}
-    };
-    for (const champ in viktorData) {
-        state.userData.matchups['Viktor'][champ] = { ...state.userData.matchups['Viktor'][champ], ...viktorData[champ] };
+    // 매치업 데이터 내 오타 ID('LeBlanc' 등) 자동 마이그레이션
+    for (const [myChamp, opps] of Object.entries(state.userData.matchups || {})) {
+        for (const [badId, goodId] of Object.entries(idFixMap)) {
+            if (opps && opps[badId]) {
+                opps[goodId] = { ...opps[badId], ...(opps[goodId] || {}) };
+                delete opps[badId];
+                needsSave = true;
+            }
+        }
     }
 
-    // Inject Anivia's match up tiers from user provided OP.GG screenshots
-    state.userData.matchups['Anivia'] = state.userData.matchups['Anivia'] || {};
-    const aniviaData = {
-        "Yasuo": {"tier": "1"}, "Katarina": {"tier": "1"}, "Lissandra": {"tier": "1"}, "Ryze": {"tier": "1"},
-        "Veigar": {"tier": "1"}, "Galio": {"tier": "1"}, "Nasus": {"tier": "1"}, "Cassiopeia": {"tier": "1"},
-        "Vex": {"tier": "1"}, "Azir": {"tier": "1"}, "Talon": {"tier": "1"}, "Naafiri": {"tier": "1"},
-        "Ziggs": {"tier": "1"}, "Sion": {"tier": "1"}, "Garen": {"tier": "1"}, "Riven": {"tier": "1"},
-        "Viktor": {"tier": "2"}, "Syndra": {"tier": "2"}, "Zed": {"tier": "2"}, "Yone": {"tier": "2"},
-        "Locke": {"tier": "2"}, "Sylas": {"tier": "2"}, "Malzahar": {"tier": "2"}, "Akali": {"tier": "2"},
-        "Fizz": {"tier": "2"}, "Vladimir": {"tier": "2"}, "Qiyana": {"tier": "2"}, "Orianna": {"tier": "2"},
-        "Ekko": {"tier": "2"}, "Irelia": {"tier": "2"}, "Kassadin": {"tier": "2"}, "Zoe": {"tier": "2"},
-        "Akshan": {"tier": "2"}, "Aurora": {"tier": "2"}, "Mel": {"tier": "2"}, "Annie": {"tier": "2"},
-        "Gwen": {"tier": "2"}, "Velkoz": {"tier": "2"}, "Swain": {"tier": "2"}, "Jayce": {"tier": "2"},
-        "Chogath": {"tier": "2"}, "Malphite": {"tier": "2"}, "Ahri": {"tier": "3"}, "TwistedFate": {"tier": "3"},
-        "LeBlanc": {"tier": "3"}, "Xerath": {"tier": "3"}, "Hwei": {"tier": "3"}, "Lux": {"tier": "3"},
-        "Diana": {"tier": "3"}, "AurelionSol": {"tier": "3"}, "Taliyah": {"tier": "3"}, "Tristana": {"tier": "3"},
-        "Brand": {"tier": "3"}, "Gangplank": {"tier": "3"}, "Pantheon": {"tier": "3"}
+    // Fallback matchup tiers (기존 OP.GG/사용자 설정이 없을 때만 기본값으로 채움)
+    const fallbackMatchups = {
+        Yorick: {
+            "Yone": {"tier": "3"}, "Nasus": {"tier": "3"}, "Jayce": {"tier": "1"}, "Jax": {"tier": "3"}, 
+            "Gangplank": {"tier": "2"}, "Darius": {"tier": "1"}, "Renekton": {"tier": "2"}, "Garen": {"tier": "3"}, 
+            "Sett": {"tier": "3"}, "Mordekaiser": {"tier": "1"}, "Irelia": {"tier": "3"}, "Aatrox": {"tier": "1"}, 
+            "Chogath": {"tier": "1"}, "Malphite": {"tier": "2"}, "Teemo": {"tier": "3"}, "Shen": {"tier": "3"}, 
+            "Gnar": {"tier": "2"}, "KSante": {"tier": "1"}, "Sion": {"tier": "3"}, "Gwen": {"tier": "3"}, 
+            "Camille": {"tier": "3"}, "Ambessa": {"tier": "2"}, "Yasuo": {"tier": "3"}, "Singed": {"tier": "3"}, 
+            "DrMundo": {"tier": "1"}, "Fiora": {"tier": "3"}, "Tryndamere": {"tier": "3"}, "Ornn": {"tier": "3"}, 
+            "Volibear": {"tier": "2"}, "Urgot": {"tier": "2"}, "Illaoi": {"tier": "2"}, "Zaahen": {"tier": "1"}, 
+            "Pantheon": {"tier": "1"}, "Olaf": {"tier": "1"}, "Kennen": {"tier": "2"}, "Warwick": {"tier": "3"}, 
+            "Trundle": {"tier": "3"}, "Gragas": {"tier": "1"}, "Rumble": {"tier": "1"}, "Kayle": {"tier": "3"}, 
+            "Akali": {"tier": "2"}, "Riven": {"tier": "2"}, "Heimerdinger": {"tier": "1"}, "Kled": {"tier": "2"}, 
+            "TahmKench": {"tier": "1"}, "Vayne": {"tier": "1"}, "Vladimir": {"tier": "1"}, "MonkeyKing": {"tier": "3"}, 
+            "Poppy": {"tier": "2"}, "Quinn": {"tier": "3"}, "Varus": {"tier": "1"}, "Anivia": {"tier": "3"}, 
+            "Ryze": {"tier": "1"}, "Zac": {"tier": "3"}, "Swain": {"tier": "1"}, "Cassiopeia": {"tier": "2"}, 
+            "Udyr": {"tier": "3"}, "MasterYi": {"tier": "1"}
+        },
+        Zac: {
+            "Yone": {"tier": "1"}, "Nasus": {"tier": "2"}, "Darius": {"tier": "2"}, "Malphite": {"tier": "2"},
+            "Garen": {"tier": "3"}, "Mordekaiser": {"tier": "3"}, "Renekton": {"tier": "1"}, "Gangplank": {"tier": "2"},
+            "Ambessa": {"tier": "1"}, "Aatrox": {"tier": "2"}, "Sett": {"tier": "1"}, "Jax": {"tier": "2"},
+            "Irelia": {"tier": "1"}, "Jayce": {"tier": "1"}, "KSante": {"tier": "2"}, "Fiora": {"tier": "1"},
+            "Camille": {"tier": "3"}, "Zaahen": {"tier": "2"}, "Olaf": {"tier": "3"}, "Teemo": {"tier": "2"},
+            "Sion": {"tier": "1"}, "DrMundo": {"tier": "1"}, "Gwen": {"tier": "2"}, "Ornn": {"tier": "3"},
+            "Shen": {"tier": "1"}, "Gnar": {"tier": "1"}, "Singed": {"tier": "3"}, "Pantheon": {"tier": "2"},
+            "Yorick": {"tier": "2"}, "Chogath": {"tier": "2"}, "Tryndamere": {"tier": "1"}, "Riven": {"tier": "1"},
+            "Volibear": {"tier": "1"}, "Yasuo": {"tier": "3"}, "Kled": {"tier": "3"}, "Gragas": {"tier": "3"},
+            "Illaoi": {"tier": "2"}, "Akali": {"tier": "1"}, "Rumble": {"tier": "1"}, "Urgot": {"tier": "1"},
+            "Kennen": {"tier": "2"}, "Vayne": {"tier": "1"}, "Anivia": {"tier": "3"}, "Kayle": {"tier": "1"},
+            "Trundle": {"tier": "1"}, "Poppy": {"tier": "2"}, "TahmKench": {"tier": "3"}
+        },
+        Quinn: {
+            "Gangplank": {"tier": "1"}, "Nasus": {"tier": "2"}, "Darius": {"tier": "1"}, "Jayce": {"tier": "1"},
+            "Garen": {"tier": "2"}, "Renekton": {"tier": "3"}, "Yone": {"tier": "1"}, "Malphite": {"tier": "3"},
+            "Jax": {"tier": "1"}, "Teemo": {"tier": "3"}, "Irelia": {"tier": "3"}, "Sett": {"tier": "1"},
+            "Aatrox": {"tier": "2"}, "Fiora": {"tier": "1"}, "Yasuo": {"tier": "2"}, "Ambessa": {"tier": "1"},
+            "Camille": {"tier": "2"}, "Gnar": {"tier": "3"}, "Olaf": {"tier": "3"}, "Mordekaiser": {"tier": "3"},
+            "DrMundo": {"tier": "2"}, "Sion": {"tier": "2"}, "Riven": {"tier": "2"}, "Akali": {"tier": "1"},
+            "Tryndamere": {"tier": "2"}, "Kennen": {"tier": "1"}, "Ornn": {"tier": "3"}, "KSante": {"tier": "1"},
+            "Pantheon": {"tier": "1"}, "Yorick": {"tier": "2"}, "Shen": {"tier": "2"}, "Chogath": {"tier": "1"},
+            "Singed": {"tier": "1"}, "Urgot": {"tier": "2"}, "Zaahen": {"tier": "1"}, "Gragas": {"tier": "1"},
+            "Volibear": {"tier": "1"}, "Kled": {"tier": "3"}, "Vayne": {"tier": "1"}, "Gwen": {"tier": "3"},
+            "Illaoi": {"tier": "1"}, "Vladimir": {"tier": "2"}, "Kayle": {"tier": "1"}, "Rumble": {"tier": "2"},
+            "Trundle": {"tier": "1"}, "TahmKench": {"tier": "3"}, "Warwick": {"tier": "3"}, "Heimerdinger": {"tier": "3"},
+            "Varus": {"tier": "1"}, "Ryze": {"tier": "1"}, "Anivia": {"tier": "1"}
+        },
+        Velkoz: {
+            "Viktor": {"tier": "2"}, "Ahri": {"tier": "2"}, "Syndra": {"tier": "2"}, "Zed": {"tier": "2"},
+            "Yasuo": {"tier": "1"}, "Sylas": {"tier": "3"}, "Locke": {"tier": "2"}, "Leblanc": {"tier": "3"},
+            "Malzahar": {"tier": "2"}, "Hwei": {"tier": "1"}, "Yone": {"tier": "2"}, "Katarina": {"tier": "2"},
+            "Fizz": {"tier": "3"}, "Lissandra": {"tier": "2"}, "Xerath": {"tier": "3"}, "Lux": {"tier": "1"},
+            "TwistedFate": {"tier": "2"}, "Akali": {"tier": "1"}, "Veigar": {"tier": "1"}, "Kassadin": {"tier": "3"},
+            "Galio": {"tier": "1"}, "Vladimir": {"tier": "1"}, "Ryze": {"tier": "1"}, "Qiyana": {"tier": "3"},
+            "Anivia": {"tier": "2"}, "Orianna": {"tier": "2"}, "Ekko": {"tier": "2"}, "Vex": {"tier": "3"},
+            "Zoe": {"tier": "1"}, "Nasus": {"tier": "1"}, "Akshan": {"tier": "2"}, "Aurora": {"tier": "3"},
+            "Diana": {"tier": "2"}, "Irelia": {"tier": "1"}, "AurelionSol": {"tier": "2"}, "Mel": {"tier": "1"},
+            "Annie": {"tier": "2"}, "Talon": {"tier": "3"}, "Azir": {"tier": "1"}, "Cassiopeia": {"tier": "1"},
+            "Taliyah": {"tier": "2"}, "Tristana": {"tier": "1"}, "Naafiri": {"tier": "1"}, "Gwen": {"tier": "3"}
+        },
+        Vladimir: {
+            "Yasuo": {"tier": "1"}, "Katarina": {"tier": "1"}, "Yone": {"tier": "1"}, "Veigar": {"tier": "1"},
+            "Orianna": {"tier": "1"}, "Ekko": {"tier": "1"}, "Diana": {"tier": "1"}, "Akshan": {"tier": "1"},
+            "Talon": {"tier": "1"}, "Azir": {"tier": "1"}, "Mel": {"tier": "1"}, "Taliyah": {"tier": "1"},
+            "Naafiri": {"tier": "1"}, "Swain": {"tier": "1"}, "Jayce": {"tier": "1"}, "Gangplank": {"tier": "1"},
+            "Malphite": {"tier": "1"}, "Ziggs": {"tier": "1"}, "Sion": {"tier": "1"}, "Smolder": {"tier": "1"},
+            "Zed": {"tier": "2"}, "Ahri": {"tier": "2"}, "Viktor": {"tier": "2"}, "Locke": {"tier": "2"},
+            "Sylas": {"tier": "2"}, "Leblanc": {"tier": "2"}, "Fizz": {"tier": "2"}, "Lissandra": {"tier": "2"},
+            "Akali": {"tier": "2"}, "TwistedFate": {"tier": "2"}, "Ryze": {"tier": "2"}, "Lux": {"tier": "2"},
+            "Xerath": {"tier": "2"}, "Kassadin": {"tier": "2"}, "Qiyana": {"tier": "2"}, "Irelia": {"tier": "2"},
+            "Galio": {"tier": "2"}, "Zoe": {"tier": "2"}, "Cassiopeia": {"tier": "2"}, "Anivia": {"tier": "2"},
+            "Vex": {"tier": "2"}, "Aurora": {"tier": "2"}, "Annie": {"tier": "2"}, "Tristana": {"tier": "2"},
+            "Gwen": {"tier": "2"}, "Pantheon": {"tier": "2"}, "Brand": {"tier": "2"}, "Chogath": {"tier": "2"},
+            "Syndra": {"tier": "3"}, "Malzahar": {"tier": "3"}, "Hwei": {"tier": "3"}, "Nasus": {"tier": "3"},
+            "AurelionSol": {"tier": "3"}, "Velkoz": {"tier": "3"}, "Garen": {"tier": "3"}, "Riven": {"tier": "3"}
+        },
+        Viktor: {
+            "Yasuo": {"tier": "1"}, "Sylas": {"tier": "1"}, "Malzahar": {"tier": "1"}, "Orianna": {"tier": "1"},
+            "Ryze": {"tier": "1"}, "Vex": {"tier": "1"}, "Cassiopeia": {"tier": "1"}, "Mel": {"tier": "1"},
+            "Annie": {"tier": "1"}, "Tristana": {"tier": "1"}, "Naafiri": {"tier": "1"}, "Sion": {"tier": "1"},
+            "Smolder": {"tier": "1"}, "Syndra": {"tier": "2"}, "Ahri": {"tier": "2"}, "Yone": {"tier": "2"},
+            "Zed": {"tier": "2"}, "Leblanc": {"tier": "2"}, "Locke": {"tier": "2"}, "TwistedFate": {"tier": "2"},
+            "Katarina": {"tier": "2"}, "Hwei": {"tier": "2"}, "Lissandra": {"tier": "2"}, "Lux": {"tier": "2"},
+            "Galio": {"tier": "2"}, "Veigar": {"tier": "2"}, "Vladimir": {"tier": "2"}, "Diana": {"tier": "2"},
+            "Irelia": {"tier": "2"}, "Ekko": {"tier": "2"}, "Qiyana": {"tier": "2"}, "Zoe": {"tier": "2"},
+            "Anivia": {"tier": "2"}, "Kassadin": {"tier": "2"}, "Nasus": {"tier": "2"}, "Akshan": {"tier": "2"},
+            "Aurora": {"tier": "2"}, "Azir": {"tier": "2"}, "Talon": {"tier": "2"}, "Taliyah": {"tier": "2"},
+            "Velkoz": {"tier": "2"}, "Jayce": {"tier": "2"}, "Ziggs": {"tier": "2"}, "Brand": {"tier": "2"},
+            "Chogath": {"tier": "2"}, "Pantheon": {"tier": "2"}, "Malphite": {"tier": "2"}, "Gangplank": {"tier": "2"},
+            "Xerath": {"tier": "3"}, "Akali": {"tier": "3"}, "Fizz": {"tier": "3"}, "AurelionSol": {"tier": "3"},
+            "Gwen": {"tier": "3"}, "Swain": {"tier": "3"}, "Garen": {"tier": "3"}, "Riven": {"tier": "3"}
+        },
+        Anivia: {
+            "Yasuo": {"tier": "1"}, "Katarina": {"tier": "1"}, "Lissandra": {"tier": "1"}, "Ryze": {"tier": "1"},
+            "Veigar": {"tier": "1"}, "Galio": {"tier": "1"}, "Nasus": {"tier": "1"}, "Cassiopeia": {"tier": "1"},
+            "Vex": {"tier": "1"}, "Azir": {"tier": "1"}, "Talon": {"tier": "1"}, "Naafiri": {"tier": "1"},
+            "Ziggs": {"tier": "1"}, "Sion": {"tier": "1"}, "Garen": {"tier": "1"}, "Riven": {"tier": "1"},
+            "Viktor": {"tier": "2"}, "Syndra": {"tier": "2"}, "Zed": {"tier": "2"}, "Yone": {"tier": "2"},
+            "Locke": {"tier": "2"}, "Sylas": {"tier": "2"}, "Malzahar": {"tier": "2"}, "Akali": {"tier": "2"},
+            "Fizz": {"tier": "2"}, "Vladimir": {"tier": "2"}, "Qiyana": {"tier": "2"}, "Orianna": {"tier": "2"},
+            "Ekko": {"tier": "2"}, "Irelia": {"tier": "2"}, "Kassadin": {"tier": "2"}, "Zoe": {"tier": "2"},
+            "Akshan": {"tier": "2"}, "Aurora": {"tier": "2"}, "Mel": {"tier": "2"}, "Annie": {"tier": "2"},
+            "Gwen": {"tier": "2"}, "Velkoz": {"tier": "2"}, "Swain": {"tier": "2"}, "Jayce": {"tier": "2"},
+            "Chogath": {"tier": "2"}, "Malphite": {"tier": "2"}, "Ahri": {"tier": "3"}, "TwistedFate": {"tier": "3"},
+            "Leblanc": {"tier": "3"}, "Xerath": {"tier": "3"}, "Hwei": {"tier": "3"}, "Lux": {"tier": "3"},
+            "Diana": {"tier": "3"}, "AurelionSol": {"tier": "3"}, "Taliyah": {"tier": "3"}, "Tristana": {"tier": "3"},
+            "Brand": {"tier": "3"}, "Gangplank": {"tier": "3"}, "Pantheon": {"tier": "3"}
+        },
+        Zoe: {
+            "Syndra": {"tier": "1"}, "Sylas": {"tier": "1"}, "Yone": {"tier": "1"}, "Hwei": {"tier": "1"},
+            "Mel": {"tier": "1"}, "Orianna": {"tier": "1"}, "Diana": {"tier": "1"}, "Ryze": {"tier": "1"},
+            "Azir": {"tier": "1"}, "Taliyah": {"tier": "1"}, "AurelionSol": {"tier": "1"}, "Tristana": {"tier": "1"},
+            "Gwen": {"tier": "1"}, "Jayce": {"tier": "1"}, "Swain": {"tier": "1"}, "Gangplank": {"tier": "1"},
+            "Chogath": {"tier": "1"}, "Garen": {"tier": "1"}, "Riven": {"tier": "1"}, "Ahri": {"tier": "2"},
+            "Zed": {"tier": "2"}, "Viktor": {"tier": "2"}, "Locke": {"tier": "2"}, "Leblanc": {"tier": "2"},
+            "TwistedFate": {"tier": "2"}, "Lissandra": {"tier": "2"}, "Akali": {"tier": "2"}, "Xerath": {"tier": "2"},
+            "Lux": {"tier": "2"}, "Vladimir": {"tier": "2"}, "Galio": {"tier": "2"}, "Qiyana": {"tier": "2"},
+            "Ekko": {"tier": "2"}, "Anivia": {"tier": "2"}, "Cassiopeia": {"tier": "2"}, "Nasus": {"tier": "2"},
+            "Naafiri": {"tier": "2"}, "Pantheon": {"tier": "2"}, "Yasuo": {"tier": "3"}, "Katarina": {"tier": "3"},
+            "Fizz": {"tier": "3"}, "Malzahar": {"tier": "3"}, "Veigar": {"tier": "3"}, "Vex": {"tier": "3"},
+            "Kassadin": {"tier": "3"}, "Irelia": {"tier": "3"}, "Aurora": {"tier": "3"}, "Akshan": {"tier": "3"},
+            "Talon": {"tier": "3"}, "Annie": {"tier": "3"}, "Velkoz": {"tier": "3"}, "Ziggs": {"tier": "3"},
+            "Brand": {"tier": "3"}, "Sion": {"tier": "3"}, "Malphite": {"tier": "3"}
+        },
+        Hwei: {
+            "Yone": {"tier": "1"}, "Sylas": {"tier": "1"}, "TwistedFate": {"tier": "1"}, "Lissandra": {"tier": "1"},
+            "Malzahar": {"tier": "1"}, "Akali": {"tier": "1"}, "Galio": {"tier": "1"}, "Vladimir": {"tier": "1"},
+            "Ryze": {"tier": "1"}, "Orianna": {"tier": "1"}, "Anivia": {"tier": "1"}, "Kassadin": {"tier": "1"},
+            "Nasus": {"tier": "1"}, "Irelia": {"tier": "1"}, "Mel": {"tier": "1"}, "Azir": {"tier": "1"},
+            "Talon": {"tier": "1"}, "Taliyah": {"tier": "1"}, "Tristana": {"tier": "1"}, "Naafiri": {"tier": "1"},
+            "Pantheon": {"tier": "1"}, "Sion": {"tier": "1"}, "Chogath": {"tier": "1"}, "Malphite": {"tier": "1"},
+            "Smolder": {"tier": "1"}, "Viktor": {"tier": "2"}, "Syndra": {"tier": "2"}, "Ahri": {"tier": "2"},
+            "Yasuo": {"tier": "2"}, "Zed": {"tier": "2"}, "Xerath": {"tier": "2"}, "Locke": {"tier": "2"},
+            "Katarina": {"tier": "2"}, "Leblanc": {"tier": "2"}, "Fizz": {"tier": "2"}, "Lux": {"tier": "2"},
+            "Veigar": {"tier": "2"}, "Diana": {"tier": "2"}, "Aurora": {"tier": "2"}, "AurelionSol": {"tier": "2"},
+            "Cassiopeia": {"tier": "2"}, "Annie": {"tier": "2"}, "Gwen": {"tier": "2"}, "Jayce": {"tier": "2"},
+            "Brand": {"tier": "2"}, "Swain": {"tier": "2"}, "Riven": {"tier": "2"}, "Gangplank": {"tier": "2"},
+            "Garen": {"tier": "2"}, "Ekko": {"tier": "3"}, "Qiyana": {"tier": "3"}, "Zoe": {"tier": "3"},
+            "Vex": {"tier": "3"}, "Akshan": {"tier": "3"}, "Velkoz": {"tier": "3"}, "Ziggs": {"tier": "3"}
+        },
+        Sion: {
+            "Malzahar": {"tier": "1"}, "Yasuo": {"tier": "1"}, "Katarina": {"tier": "1"}, "Fizz": {"tier": "1"},
+            "Lissandra": {"tier": "1"}, "Ryze": {"tier": "1"}, "Vex": {"tier": "1"}, "AurelionSol": {"tier": "1"},
+            "Talon": {"tier": "1"}, "Annie": {"tier": "1"}, "Zoe": {"tier": "1"}, "Mel": {"tier": "1"},
+            "Zed": {"tier": "2"}, "Leblanc": {"tier": "2"}, "Sylas": {"tier": "2"}, "Xerath": {"tier": "2"},
+            "Akali": {"tier": "2"}, "Galio": {"tier": "2"}, "Lux": {"tier": "2"}, "Ekko": {"tier": "2"},
+            "Akshan": {"tier": "2"}, "Aurora": {"tier": "2"}, "Viktor": {"tier": "3"}, "Syndra": {"tier": "3"},
+            "Ahri": {"tier": "3"}, "Locke": {"tier": "3"}, "TwistedFate": {"tier": "3"}, "Yone": {"tier": "3"},
+            "Qiyana": {"tier": "3"}, "Hwei": {"tier": "3"}, "Veigar": {"tier": "3"}, "Vladimir": {"tier": "3"},
+            "Nasus": {"tier": "3"}, "Irelia": {"tier": "3"}, "Diana": {"tier": "3"}, "Orianna": {"tier": "3"},
+            "Anivia": {"tier": "3"}, "Cassiopeia": {"tier": "3"}, "Azir": {"tier": "3"}, "Kassadin": {"tier": "3"}
+        },
+        Aatrox: {
+            "DrMundo": {"tier": "1"}, "Yasuo": {"tier": "1"}, "Sion": {"tier": "1"}, "Akali": {"tier": "1"},
+            "Gragas": {"tier": "1"}, "Trundle": {"tier": "1"}, "TahmKench": {"tier": "1"}, "Vladimir": {"tier": "1"},
+            "Ryze": {"tier": "1"}, "MasterYi": {"tier": "1"}, "Nasus": {"tier": "2"}, "Jayce": {"tier": "2"},
+            "Renekton": {"tier": "2"}, "Darius": {"tier": "2"}, "Gangplank": {"tier": "2"}, "Malphite": {"tier": "2"},
+            "Sett": {"tier": "2"}, "Garen": {"tier": "2"}, "Jax": {"tier": "2"}, "Mordekaiser": {"tier": "2"},
+            "Fiora": {"tier": "2"}, "Camille": {"tier": "2"}, "KSante": {"tier": "2"}, "Teemo": {"tier": "2"},
+            "Shen": {"tier": "2"}, "Gnar": {"tier": "2"}, "Tryndamere": {"tier": "2"}, "Ornn": {"tier": "2"},
+            "Volibear": {"tier": "2"}, "Zaahen": {"tier": "2"}, "Illaoi": {"tier": "2"}, "Olaf": {"tier": "2"},
+            "Gwen": {"tier": "2"}, "Chogath": {"tier": "2"}, "Vayne": {"tier": "2"}, "Rumble": {"tier": "2"},
+            "Kayle": {"tier": "2"}, "Quinn": {"tier": "2"}, "Anivia": {"tier": "2"}, "Udyr": {"tier": "2"},
+            "Varus": {"tier": "2"}, "Swain": {"tier": "2"}, "Yone": {"tier": "3"}, "Irelia": {"tier": "3"},
+            "Ambessa": {"tier": "3"}, "Pantheon": {"tier": "3"}, "Urgot": {"tier": "3"}, "Yorick": {"tier": "3"},
+            "Singed": {"tier": "3"}, "Riven": {"tier": "3"}, "Kled": {"tier": "3"}, "Kennen": {"tier": "3"},
+            "Warwick": {"tier": "3"}, "MonkeyKing": {"tier": "3"}, "Heimerdinger": {"tier": "3"}, "Poppy": {"tier": "3"},
+            "Zac": {"tier": "3"}, "Cassiopeia": {"tier": "3"}
+        }
     };
-    for (const champ in aniviaData) {
-        state.userData.matchups['Anivia'][champ] = { ...state.userData.matchups['Anivia'][champ], ...aniviaData[champ] };
+
+    for (const [myChamp, dataMap] of Object.entries(fallbackMatchups)) {
+        state.userData.matchups[myChamp] = state.userData.matchups[myChamp] || {};
+        for (const [oppChamp, fallbackObj] of Object.entries(dataMap)) {
+            if (!state.userData.matchups[myChamp][oppChamp]) {
+                state.userData.matchups[myChamp][oppChamp] = { ...fallbackObj };
+                needsSave = true;
+            }
+        }
     }
 
-    // Inject Zoe's match up tiers from user provided OP.GG screenshots
-    state.userData.matchups['Zoe'] = state.userData.matchups['Zoe'] || {};
-    const zoeData = {
-        "Syndra": {"tier": "1"}, "Sylas": {"tier": "1"}, "Yone": {"tier": "1"}, "Hwei": {"tier": "1"},
-        "Mel": {"tier": "1"}, "Orianna": {"tier": "1"}, "Diana": {"tier": "1"}, "Ryze": {"tier": "1"},
-        "Azir": {"tier": "1"}, "Taliyah": {"tier": "1"}, "AurelionSol": {"tier": "1"}, "Tristana": {"tier": "1"},
-        "Gwen": {"tier": "1"}, "Jayce": {"tier": "1"}, "Swain": {"tier": "1"}, "Gangplank": {"tier": "1"},
-        "Chogath": {"tier": "1"}, "Garen": {"tier": "1"}, "Riven": {"tier": "1"}, "Ahri": {"tier": "2"},
-        "Zed": {"tier": "2"}, "Viktor": {"tier": "2"}, "Locke": {"tier": "2"}, "LeBlanc": {"tier": "2"},
-        "TwistedFate": {"tier": "2"}, "Lissandra": {"tier": "2"}, "Akali": {"tier": "2"}, "Xerath": {"tier": "2"},
-        "Lux": {"tier": "2"}, "Vladimir": {"tier": "2"}, "Galio": {"tier": "2"}, "Qiyana": {"tier": "2"},
-        "Ekko": {"tier": "2"}, "Anivia": {"tier": "2"}, "Cassiopeia": {"tier": "2"}, "Nasus": {"tier": "2"},
-        "Naafiri": {"tier": "2"}, "Pantheon": {"tier": "2"}, "Yasuo": {"tier": "3"}, "Katarina": {"tier": "3"},
-        "Fizz": {"tier": "3"}, "Malzahar": {"tier": "3"}, "Veigar": {"tier": "3"}, "Vex": {"tier": "3"},
-        "Kassadin": {"tier": "3"}, "Irelia": {"tier": "3"}, "Aurora": {"tier": "3"}, "Akshan": {"tier": "3"},
-        "Talon": {"tier": "3"}, "Annie": {"tier": "3"}, "Velkoz": {"tier": "3"}, "Ziggs": {"tier": "3"},
-        "Brand": {"tier": "3"}, "Sion": {"tier": "3"}, "Malphite": {"tier": "3"}
-    };
-    for (const champ in zoeData) {
-        state.userData.matchups['Zoe'][champ] = { ...state.userData.matchups['Zoe'][champ], ...zoeData[champ] };
+    if (needsSave) {
+        saveUserData();
     }
-
-    // Inject Hwei's match up tiers from user provided OP.GG screenshots
-    state.userData.matchups['Hwei'] = state.userData.matchups['Hwei'] || {};
-    const hweiData = {
-        "Yone": {"tier": "1"}, "Sylas": {"tier": "1"}, "TwistedFate": {"tier": "1"}, "Lissandra": {"tier": "1"},
-        "Malzahar": {"tier": "1"}, "Akali": {"tier": "1"}, "Galio": {"tier": "1"}, "Vladimir": {"tier": "1"},
-        "Ryze": {"tier": "1"}, "Orianna": {"tier": "1"}, "Anivia": {"tier": "1"}, "Kassadin": {"tier": "1"},
-        "Nasus": {"tier": "1"}, "Irelia": {"tier": "1"}, "Mel": {"tier": "1"}, "Azir": {"tier": "1"},
-        "Talon": {"tier": "1"}, "Taliyah": {"tier": "1"}, "Tristana": {"tier": "1"}, "Naafiri": {"tier": "1"},
-        "Pantheon": {"tier": "1"}, "Sion": {"tier": "1"}, "Chogath": {"tier": "1"}, "Malphite": {"tier": "1"},
-        "Smolder": {"tier": "1"}, "Viktor": {"tier": "2"}, "Syndra": {"tier": "2"}, "Ahri": {"tier": "2"},
-        "Yasuo": {"tier": "2"}, "Zed": {"tier": "2"}, "Xerath": {"tier": "2"}, "Locke": {"tier": "2"},
-        "Katarina": {"tier": "2"}, "LeBlanc": {"tier": "2"}, "Fizz": {"tier": "2"}, "Lux": {"tier": "2"},
-        "Veigar": {"tier": "2"}, "Diana": {"tier": "2"}, "Aurora": {"tier": "2"}, "AurelionSol": {"tier": "2"},
-        "Cassiopeia": {"tier": "2"}, "Annie": {"tier": "2"}, "Gwen": {"tier": "2"}, "Jayce": {"tier": "2"},
-        "Brand": {"tier": "2"}, "Swain": {"tier": "2"}, "Riven": {"tier": "2"}, "Gangplank": {"tier": "2"},
-        "Garen": {"tier": "2"}, "Ekko": {"tier": "3"}, "Qiyana": {"tier": "3"}, "Zoe": {"tier": "3"},
-        "Vex": {"tier": "3"}, "Akshan": {"tier": "3"}, "Velkoz": {"tier": "3"}, "Ziggs": {"tier": "3"}
-    };
-    for (const champ in hweiData) {
-        state.userData.matchups['Hwei'][champ] = { ...state.userData.matchups['Hwei'][champ], ...hweiData[champ] };
-    }
-
-    // Inject Sion's match up tiers from user provided OP.GG screenshots
-    state.userData.matchups['Sion'] = state.userData.matchups['Sion'] || {};
-    const sionData = {
-        "Malzahar": {"tier": "1"}, "Yasuo": {"tier": "1"}, "Katarina": {"tier": "1"}, "Fizz": {"tier": "1"},
-        "Lissandra": {"tier": "1"}, "Ryze": {"tier": "1"}, "Vex": {"tier": "1"}, "AurelionSol": {"tier": "1"},
-        "Talon": {"tier": "1"}, "Annie": {"tier": "1"}, "Zoe": {"tier": "1"}, "Mel": {"tier": "1"},
-        "Zed": {"tier": "2"}, "LeBlanc": {"tier": "2"}, "Sylas": {"tier": "2"}, "Xerath": {"tier": "2"},
-        "Akali": {"tier": "2"}, "Galio": {"tier": "2"}, "Lux": {"tier": "2"}, "Ekko": {"tier": "2"},
-        "Akshan": {"tier": "2"}, "Aurora": {"tier": "2"}, "Viktor": {"tier": "3"}, "Syndra": {"tier": "3"},
-        "Ahri": {"tier": "3"}, "Locke": {"tier": "3"}, "TwistedFate": {"tier": "3"}, "Yone": {"tier": "3"},
-        "Qiyana": {"tier": "3"}, "Hwei": {"tier": "3"}, "Veigar": {"tier": "3"}, "Vladimir": {"tier": "3"},
-        "Nasus": {"tier": "3"}, "Irelia": {"tier": "3"}, "Diana": {"tier": "3"}, "Orianna": {"tier": "3"},
-        "Anivia": {"tier": "3"}, "Cassiopeia": {"tier": "3"}, "Azir": {"tier": "3"}, "Kassadin": {"tier": "3"}
-    };
-    for (const champ in sionData) {
-        state.userData.matchups['Sion'][champ] = { ...state.userData.matchups['Sion'][champ], ...sionData[champ] };
-    }
-
-    // Inject Aatrox's match up tiers from user provided OP.GG screenshots
-    state.userData.matchups['Aatrox'] = state.userData.matchups['Aatrox'] || {};
-    const aatroxData = {
-        "DrMundo": {"tier": "1"}, "Yasuo": {"tier": "1"}, "Sion": {"tier": "1"}, "Akali": {"tier": "1"},
-        "Gragas": {"tier": "1"}, "Trundle": {"tier": "1"}, "TahmKench": {"tier": "1"}, "Vladimir": {"tier": "1"},
-        "Ryze": {"tier": "1"}, "MasterYi": {"tier": "1"}, "Nasus": {"tier": "2"}, "Jayce": {"tier": "2"},
-        "Renekton": {"tier": "2"}, "Darius": {"tier": "2"}, "Gangplank": {"tier": "2"}, "Malphite": {"tier": "2"},
-        "Sett": {"tier": "2"}, "Garen": {"tier": "2"}, "Jax": {"tier": "2"}, "Mordekaiser": {"tier": "2"},
-        "Fiora": {"tier": "2"}, "Camille": {"tier": "2"}, "KSante": {"tier": "2"}, "Teemo": {"tier": "2"},
-        "Shen": {"tier": "2"}, "Gnar": {"tier": "2"}, "Tryndamere": {"tier": "2"}, "Ornn": {"tier": "2"},
-        "Volibear": {"tier": "2"}, "Zaahen": {"tier": "2"}, "Illaoi": {"tier": "2"}, "Olaf": {"tier": "2"},
-        "Gwen": {"tier": "2"}, "Chogath": {"tier": "2"}, "Vayne": {"tier": "2"}, "Rumble": {"tier": "2"},
-        "Kayle": {"tier": "2"}, "Quinn": {"tier": "2"}, "Anivia": {"tier": "2"}, "Udyr": {"tier": "2"},
-        "Varus": {"tier": "2"}, "Swain": {"tier": "2"}, "Yone": {"tier": "3"}, "Irelia": {"tier": "3"},
-        "Ambessa": {"tier": "3"}, "Pantheon": {"tier": "3"}, "Urgot": {"tier": "3"}, "Yorick": {"tier": "3"},
-        "Singed": {"tier": "3"}, "Riven": {"tier": "3"}, "Kled": {"tier": "3"}, "Kennen": {"tier": "3"},
-        "Warwick": {"tier": "3"}, "MonkeyKing": {"tier": "3"}, "Heimerdinger": {"tier": "3"}, "Poppy": {"tier": "3"},
-        "Zac": {"tier": "3"}, "Cassiopeia": {"tier": "3"}
-    };
-    for (const champ in aatroxData) {
-        state.userData.matchups['Aatrox'][champ] = { ...state.userData.matchups['Aatrox'][champ], ...aatroxData[champ] };
-    }
-
-    saveUserData();
 }
 
 let cloudSaveTimeout = null;
@@ -481,18 +454,13 @@ async function startOpggSync() {
         // Build list of tasks {champId, role}
         let tasks = [];
         if (role === 'all') {
-            // For ALL, get every champion in every role from state.userData.roles
-            for (const [r, champIds] of Object.entries(state.userData.roles)) {
-                champIds.forEach(champId => {
-                    tasks.push({ champId: champId, role: r });
-                });
+            for (const r of ['top', 'jungle', 'mid', 'adc', 'support']) {
+                const combined = new Set([...(state.userData.roles[r] || []), ...(state.userData.myPool[r] || [])]);
+                combined.forEach(champId => tasks.push({ champId, role: r }));
             }
         } else {
-            // For specific role
-            const roleIds = state.userData.roles[role] || [];
-            roleIds.forEach(champId => {
-                tasks.push({ champId: champId, role: role });
-            });
+            const combined = new Set([...(state.userData.roles[role] || []), ...(state.userData.myPool[role] || [])]);
+            combined.forEach(champId => tasks.push({ champId, role }));
         }
         
         if (tasks.length === 0) {
