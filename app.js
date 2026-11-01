@@ -502,12 +502,13 @@ async function startOpggSync() {
                         
                         const roleData = cacheData.matchups[champId][opggRole];
                         for (const [oppId, info] of Object.entries(roleData)) {
+                            const prev = state.userData.matchups[champId][oppId] || {};
+                            delete prev.opggGames;
+                            delete prev.opggUpdated;
                             state.userData.matchups[champId][oppId] = {
-                                ...state.userData.matchups[champId][oppId],
+                                ...prev,
                                 tier: info.tier,
-                                opggWinRate: info.opggWinRate,
-                                opggGames: info.games,
-                                opggUpdated: cacheData.updatedAt
+                                opggWinRate: info.opggWinRate
                             };
                         }
                         updatedCount++;
@@ -679,12 +680,13 @@ async function executeSyncBatch(tasks, overlay) {
             if (!state.userData.matchups[champId]) state.userData.matchups[champId] = {};
             
             for (const [oppId, info] of Object.entries(data)) {
+                const prev = state.userData.matchups[champId][oppId] || {};
+                delete prev.opggGames;
+                delete prev.opggUpdated;
                 state.userData.matchups[champId][oppId] = {
-                    ...state.userData.matchups[champId][oppId],
+                    ...prev,
                     tier: info.tier,
-                    opggWinRate: info.opggWinRate,
-                    opggGames: info.games,
-                    opggUpdated: new Date().toISOString()
+                    opggWinRate: info.opggWinRate
                 };
             }
             
