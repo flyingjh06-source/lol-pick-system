@@ -453,8 +453,14 @@ app.get('/api/user/:username', async (req, res) => {
         
         if (getRes.ok) {
             const getJson = await getRes.json();
-            const content = Buffer.from(getJson.content, 'base64').toString('utf8');
-            return res.json(JSON.parse(content));
+            if (getJson.content) {
+                const content = Buffer.from(getJson.content, 'base64').toString('utf8');
+                return res.json(JSON.parse(content));
+            } else if (getJson.download_url) {
+                const rawRes = await fetch(getJson.download_url);
+                const rawData = await rawRes.json();
+                return res.json(rawData);
+            }
         } else {
             return res.status(404).json({error: 'User not found'});
         }
@@ -484,7 +490,7 @@ app.post('/api/user/:username', async (req, res) => {
             sha = getJson.sha;
         }
         
-        const contentBase64 = Buffer.from(JSON.stringify(userData, null, 2)).toString('base64');
+        const contentBase64 = Buffer.from(JSON.stringify(userData)).toString('base64');
         const putRes = await fetch(`https://api.github.com/repos/${repo}/contents/${filePath}`, {
             method: 'PUT',
             headers: {
